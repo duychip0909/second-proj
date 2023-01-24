@@ -11,13 +11,14 @@ class Coffee extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'image',
         'name',
         'description',
+        'price',
+        'image',
         'bean_id'
     ];
 
-    function beans(){
+    function beans() {
         return $this->belongsTo(Beans::class ,'bean_id', 'id');
     }
 }

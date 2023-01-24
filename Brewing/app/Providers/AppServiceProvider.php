@@ -2,7 +2,11 @@
 
 namespace App\Providers;
 
+use App\Services\Implement\AdminService;
+use App\Services\Implement\CoffeesService;
 use Illuminate\Support\ServiceProvider;
+use App\Services\Interfaces\IAdminService;
+use App\Services\Interfaces\ICoffeesService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +17,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton(ICoffeesService::class, CoffeesService::class);
+        $this->app->singleton(IAdminService::class, AdminService::class);
     }
 
     /**

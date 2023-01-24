@@ -1,1 +1,15 @@
-<?php
+:root {
+    --drinks-img-height: 260px;
+}
+
+.drinks-img-wrapper {
+    max-height: var(--drinks-img-height);
+}
+
+.drinks:hover .drinks-img {
+    transform: scale(1.1);
+}
+
+.drinks-img, .drinks {
+    transition: all .3s ease-in-out;
+}
