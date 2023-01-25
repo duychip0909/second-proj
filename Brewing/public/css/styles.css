@@ -13,3 +13,8 @@
 .drinks-img, .drinks {
     transition: all .3s ease-in-out;
 }
+
+.drink-options {
+    inset: 50% 0 auto auto;
+    transform: translate(-55%, -50%);
+}

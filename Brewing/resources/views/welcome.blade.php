@@ -47,7 +47,11 @@
                                 <div class="p-3">
                                     <a href="#">
                                         <h5 class="text-base font-bold tracking-tight text-gray-900 dark:text-white text-center">
-                                            {{$coffee->name}}</h5>
+                                            {{$coffee->name}}
+                                            @foreach($options as $option)
+                                                <span class="text-xs px-0.5 rounded {{$option == 'Hot' ? 'text-red-600 bg-red-200' : 'text-blue-600 bg-blue-200'}}">{{$option}}</span>
+                                            @endforeach
+                                        </h5>
                                     </a>
                                     <div class="flex items-center justify-center">
                                         <span class="text-base font-medium text-gray-900 dark:text-white">{{$coffee->price}}đ</span>

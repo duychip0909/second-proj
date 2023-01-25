@@ -5,7 +5,7 @@
             <h5 class="mb-0">Form add coffee</h5> <small class="text-muted float-end">Default label</small>
         </div>
         <div class="card-body">
-            <form method="post" action="{{route('coffee.store')}}">
+            <form method="post" action="{{route('coffee.store')}}" enctype="multipart/form-data">
                 @csrf
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label" for="basic-default-name">Coffee name</label>
@@ -37,7 +37,7 @@
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label" for="basic-default-phone">Image</label>
                     <div class="col-sm-10">
-                        <input type="text" id="basic-default-phone" name="image" class="form-control phone-mask" placeholder="..." aria-label="658 799 8941" aria-describedby="basic-default-phone">
+                        <input type="file" id="basic-default-phone" name="image" class="form-control phone-mask" placeholder="..." aria-label="658 799 8941" aria-describedby="basic-default-phone">
                         @error('image')
                         <p class="text-danger m-0">*{{ $message }}</p>
                         @enderror
