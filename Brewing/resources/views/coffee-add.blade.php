@@ -37,11 +37,14 @@
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label" for="basic-default-phone">Image</label>
                     <div class="col-sm-10">
-                        <input type="file" id="basic-default-phone" name="image" class="form-control phone-mask" placeholder="..." aria-label="658 799 8941" aria-describedby="basic-default-phone">
+                        <input type="file" accept="image/*" id="img-input" name="image" class="form-control phone-mask" placeholder="..." aria-label="658 799 8941" aria-describedby="basic-default-phone">
                         @error('image')
                         <p class="text-danger m-0">*{{ $message }}</p>
                         @enderror
                     </div>
+                </div>
+                <div class="img-preview rounded my-2 mx-auto border">
+                    <img src="./img.jpg" id="img-preview" class="block mx-auto d-block" alt="">
                 </div>
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label" for="basic-default-message">Bean</label>
@@ -68,4 +71,17 @@
             </form>
         </div>
     </div>
+@endsection
+
+@section('customScript')
+    <script>
+        const input = document.getElementById('img-input');
+        const image = document.getElementById('img-preview');
+        input.addEventListener('change', (e) => {
+            if (e.target.files.length) {
+                const src = URL.createObjectURL(e.target.files[0]);
+                image.src = src;
+            }
+        });
+    </script>
 @endsection

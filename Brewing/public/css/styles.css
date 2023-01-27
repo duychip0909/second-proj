@@ -18,3 +18,13 @@
     inset: 50% 0 auto auto;
     transform: translate(-55%, -50%);
 }
+
+#img-preview {
+    object-fit: cover;
+    height: 100%;
+}
+
+.img-preview {
+    width: 800px;
+    height: 500px;
+}
