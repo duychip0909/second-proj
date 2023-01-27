@@ -1,5 +1,10 @@
 <div class="card">
-    <h5 class="card-header">Coffee Beans Manage</h5>
+    <div class="d-flex align-items-center justify-content-between p-4">
+        <h5 class="card-header p-0">Coffee Beans Manage</h5>
+        <button type="button" class="btn btn-icon btn-outline-secondary">
+            <i class="bx bx-link-alt"></i>
+        </button>
+    </div>
     <div class="p-4">
         <div class="row mb-5">
             @foreach($beans as $bean)
