@@ -78,23 +78,18 @@
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 {{--                <i class="menu-icon tf-icons bx bx-dock-top"></i>--}}
-                <i class='menu-icon tf-icons bx bx-location-plus'></i>
-                <div data-i18n="Account Settings">Location</div>
+                <i class='menu-icon tf-icons bx bx-coffee'></i>
+                <div data-i18n="Account Settings">Coffee</div>
             </a>
             <ul class="menu-sub">
                 <li class="menu-item">
-                    <a href="#" class="menu-link">
-                        <div data-i18n="Account">Overview</div>
+                    <a href="{{route('coffee.create')}}" class="menu-link">
+                        <div data-i18n="Account">Add</div>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="#" class="menu-link">
+                    <a href="{{route('coffee.manage')}}" class="menu-link">
                         <div data-i18n="Account">Manage</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                        <div data-i18n="Notifications">Create</div>
                     </a>
                 </li>
             </ul>
@@ -102,18 +97,13 @@
         <!-- User -->
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-user-circle"></i>
-                <div data-i18n="Authentications">User</div>
+                <i class="menu-icon tf-icons bx bxs-analyse"></i>
+                <div data-i18n="Authentications">Coffee beans</div>
             </a>
             <ul class="menu-sub">
                 <li class="menu-item">
-                    <a href="#" class="menu-link">
+                    <a href="{{route('coffee-beans.manage')}}" class="menu-link">
                         <div data-i18n="Basic">Manage</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                        <div data-i18n="Basic">Create</div>
                     </a>
                 </li>
             </ul>

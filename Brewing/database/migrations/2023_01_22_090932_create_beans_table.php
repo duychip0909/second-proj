@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('beans', function (Blueprint $table) {
             $table->id();
             $table->string('bean');
+            $table->string('image');
+            $table->text('description');
             $table->timestamps();
         });
     }

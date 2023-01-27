@@ -10,7 +10,7 @@ class ViewController extends Controller
 {
     public function shop()
     {
-        $coffees = Coffee::all();
+        $coffees = Coffee::all()->where('status', '=', 1);
         $options = DrinkOptions::getValues();
         return view('welcome', compact('coffees', 'options'));
     }

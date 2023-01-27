@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Repositories;
+use App\Enums\CoffeeStatus;
 
 class BaseRepository implements BaseRepositoryInterface
 {
@@ -18,6 +19,20 @@ class BaseRepository implements BaseRepositoryInterface
     public function store($data)
     {
         $record = $this->model->newQuery()->create($data);
+        $record->save();
+        $record->refresh();
+        return $record;
+    }
+
+    public function edit($id)
+    {
+        return $this->model->where('id', '=', $id)->first();
+    }
+
+    public function update($data, $id)
+    {
+        $record = $this->model->where('id', '=', $id)->first();
+        $record->fill($data);
         $record->save();
         $record->refresh();
         return $record;

@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Enums\CoffeeStatus;
 
 return new class extends Migration
 {
@@ -20,7 +21,8 @@ return new class extends Migration
             $table->decimal('price', 9, 3);
             $table->string('image');
             $table->unsignedBigInteger('bean_id');
-            $table->foreign('bean_id')->references('id')->on('beans');
+            $table->foreign('bean_id')->references('id')->on('beans')->onDelete('cascade');
+            $table->tinyInteger('status')->unsigned()->default(CoffeeStatus::ACTIVE);
             $table->timestamps();
             $table->softDeletes();
         });

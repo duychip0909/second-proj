@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CoffeeController;
 use App\Http\Controllers\ViewController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CoffeeBeansController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,14 @@ Route::middleware('auth')->prefix('admin')->group(function() {
     Route::group(['prefix' => 'coffee'], function() {
        Route::get('create', [CoffeeController::class, 'create'])->name('coffee.create');
        Route::post('store', [CoffeeController::class, 'store'])->name('coffee.store');
+       Route::get('manage', [CoffeeController::class, 'manage'])->name('coffee.manage');
+       Route::post('toggle/{id}', [CoffeeController::class, 'status'])->name('coffee.status');
+       Route::get('edit/{id}', [CoffeeController::class, 'edit'])->name('coffee.form-edit');
+       Route::post('update/{id}', [CoffeeController::class, 'update'])->name('coffee.update');
+    });
+
+    Route::group(['prefix' => 'coffee_beans'], function() {
+       Route::get('manage', [CoffeeBeansController::class, 'manage'])->name('coffee-beans.manage');
     });
 });
 

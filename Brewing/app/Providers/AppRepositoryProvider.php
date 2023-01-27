@@ -22,6 +22,7 @@ class AppRepositoryProvider extends ServiceProvider
         $this->app->singleton(BaseRepositoryInterface::class, BaseRepository::class);
         $this->app->singleton(CoffeeRepositoryInterface::class, CoffeeRepository::class);
         $this->app->singleton(AdminRepositoryInterface::class, AdminRepository::class);
+        $this->app->singleton(CoffeeRepositoryInterface::class, CoffeeRepository::class);
     }
 
     /**

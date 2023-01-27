@@ -28,3 +28,37 @@
     width: 800px;
     height: 500px;
 }
+
+.coffee-img {
+    width: 100px;
+    height: 100px;
+}
+
+.coffee-img img {
+    object-fit: cover;
+    aspect-ratio: 1;
+    width: 100%;
+}
+
+.coffee-bean .card-img-overlay {
+    background: #22222250;
+    transition: all .4s ease-in-out;
+}
+
+.coffee-bean:hover .card-img-overlay {
+    background: #00000090;
+}
+
+.coffee-bean:hover .action-group {
+    opacity: 1;
+    visibility: visible;
+    inset: 50% auto auto 50%;
+}
+
+.action-group {
+    inset: 55% auto auto 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all .4s ease-in-out;
+}
