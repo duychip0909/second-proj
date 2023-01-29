@@ -2,7 +2,9 @@
 
 namespace App\Repositories\Interfaces;
 
-interface CoffeeBeanRepositoryInterface
-{
+use App\Repositories\BaseRepositoryInterface;
 
+interface CoffeeBeanRepositoryInterface extends BaseRepositoryInterface
+{
+    public function store($data);
 }

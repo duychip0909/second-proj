@@ -1,8 +1,8 @@
 <div class="card">
     <div class="d-flex align-items-center justify-content-between p-4">
         <h5 class="card-header p-0">Coffee Beans Manage</h5>
-        <button type="button" class="btn btn-icon btn-outline-secondary">
-            <i class="bx bx-link-alt"></i>
+        <button type="button" class="btn btn-icon btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#bean-add">
+            <i class="bx bx-plus"></i>
         </button>
     </div>
     <div class="p-4">
@@ -29,6 +29,37 @@
                     </div>
                 </div>
             @endforeach
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="bean-add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Coffee bean add form</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="{{route('coffee-beans.store')}}" enctype="multipart/form-data">
+                    @csrf
+                    <div class="mb-3">
+                        <label class="form-label" for="basic-default-fullname">Bean name</label>
+                        <input type="text" class="form-control" name="bean" id="basic-default-fullname" placeholder="...">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="basic-default-company">Bean image</label>
+                        <input type="file" accept="image/*" class="form-control" name="image" id="basic-default-company" placeholder="ACME Inc.">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="basic-default-email">Bean description</label>
+                        <div class="input-group input-group-merge">
+                            <input type="text" id="basic-default-email" name="description" class="form-control" placeholder="..." aria-label="john.doe" aria-describedby="basic-default-email2">
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>

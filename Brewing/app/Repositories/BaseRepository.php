@@ -18,6 +18,7 @@ class BaseRepository implements BaseRepositoryInterface
 
     public function store($data)
     {
+        dd($this->model);
         $record = $this->model->newQuery()->create($data);
         $record->save();
         $record->refresh();

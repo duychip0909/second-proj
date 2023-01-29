@@ -12,7 +12,9 @@ class Beans extends Model
 
     protected $fillable = [
         'id',
-        'bean'
+        'bean',
+        'image',
+        'description'
     ];
 
     public function coffees() {

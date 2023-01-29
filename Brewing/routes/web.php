@@ -37,9 +37,12 @@ Route::middleware('auth')->prefix('admin')->group(function() {
 
     Route::group(['prefix' => 'coffee_beans'], function() {
        Route::get('manage', [CoffeeBeansController::class, 'manage'])->name('coffee-beans.manage');
+       Route::post('store', [CoffeeBeansController::class, 'store'])->name('coffee-beans.store');
     });
 });
 
 Route::group(['prefix' => 'coffee'], function() {
     Route::get('/', [ViewController::class, 'shop'])->name('coffee.shop');
+    Route::get('addToCart/{id}', [ViewController::class, 'addToCart'])->name('coffee.addToCart');
+    Route::get('showCart', [ViewController::class, 'showCart'])->name('coffee.showCart');
 });
