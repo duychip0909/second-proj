@@ -62,3 +62,7 @@
     visibility: hidden;
     transition: all .4s ease-in-out;
 }
+
+.arrow-back:hover svg {
+    transform: translateX(-5px);
+}

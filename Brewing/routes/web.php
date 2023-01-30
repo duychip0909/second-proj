@@ -45,4 +45,6 @@ Route::group(['prefix' => 'coffee'], function() {
     Route::get('/', [ViewController::class, 'shop'])->name('coffee.shop');
     Route::get('addToCart/{id}', [ViewController::class, 'addToCart'])->name('coffee.addToCart');
     Route::get('showCart', [ViewController::class, 'showCart'])->name('coffee.showCart');
+    Route::get('updateCart', [ViewController::class, 'updateCart'])->name('coffee.updateCart');
+    Route::get('removeCup', [ViewController::class, 'removeCup'])->name('coffee.removeCup');
 });

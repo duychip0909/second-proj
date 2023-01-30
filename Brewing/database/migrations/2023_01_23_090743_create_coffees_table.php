@@ -18,7 +18,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->decimal('price', 9, 3);
+            $table->integer('price');
             $table->string('image');
             $table->unsignedBigInteger('bean_id');
             $table->foreign('bean_id')->references('id')->on('beans')->onDelete('cascade');

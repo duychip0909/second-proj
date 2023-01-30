@@ -8,24 +8,35 @@ use Illuminate\Http\Request;
 
 class ViewController extends Controller
 {
+    function getCartData() {
+        $carts = session()->get('cart');
+        $totalQuantity = count($carts);
+        $subTotal = 0;
+        $cupTotal = 0;
+        $coffees = Coffee::all();
+        $options = DrinkOptions::getValues();
+        foreach ($carts as $cart) {
+            $subTotal += $cart['price'] * $cart['quantity'];
+            $cupTotal += $cart['quantity'];
+        }
+        return compact('carts', 'totalQuantity', 'subTotal', 'cupTotal', 'coffees', 'options');
+    }
     public function shop()
     {
         $coffees = Coffee::all()->where('status', '=', 1);
         $options = DrinkOptions::getValues();
-        return view('welcome', compact('coffees', 'options'));
+        $carts = session()->get('cart');
+        $cupTotal = 0;
+        foreach ($carts as $cart) {
+            $cupTotal += $cart['quantity'];
+        }
+        return view('welcome', compact('coffees', 'options', 'cupTotal'));
     }
-
-    public $subTotal;
 
     public function showCart()
     {
-        $carts = session()->get('cart');
-        $totalQuantity = count($carts);
-        $subTotal = 0;
-        foreach ($carts as $cart) {
-            $subTotal += $cart['price'] * $cart['quantity'];
-        }
-        return view('cart', compact('carts', 'totalQuantity', 'subTotal'));
+        $cartData = $this->getCartData();
+        return view('cart', $cartData);
     }
 
     public function addToCart($id)
@@ -36,6 +47,7 @@ class ViewController extends Controller
             $cart[$id]['quantity'] = $cart[$id]['quantity'] + 1;
         } else {
             $cart[$id] = [
+                'id' => $coffee->id,
                 'name' => $coffee->name,
                 'price' => $coffee->price,
                 'quantity' => 1,
@@ -43,7 +55,38 @@ class ViewController extends Controller
             ];
         }
         session()->put('cart', $cart);
-        echo "<pre>";
-        print_r(session()->get('cart'));
+        $cartData = $this->getCartData();
+        return response()->json([
+            'view' => view('welcome', $cartData)->render()
+        ]);
+    }
+
+    public function updateCart(Request $request)
+    {
+        if ($request->id && $request->quantity) {
+           $carts = session()->get('cart');
+           $carts[$request->id]['quantity'] = $request->quantity;
+           session()->put('cart', $carts);
+           $cartData = $this->getCartData();
+           $viewName = $request->ajax() ? 'cart-items' : 'cart';
+           $view = view($viewName, $cartData)->render();
+           return response()->json([
+               'view' => $view
+           ]);
+        }
+    }
+
+    public function removeCup(Request $request)
+    {
+        if ($request->id) {
+            $carts = session()->get('cart');
+            unset($carts[$request->id]);
+            session()->put('cart', $carts);
+            $cartData = $this->getCartData();
+            $view = view('cart', $cartData)->render();
+            return response()->json([
+               'view' => $view
+            ]);
+        }
     }
 }

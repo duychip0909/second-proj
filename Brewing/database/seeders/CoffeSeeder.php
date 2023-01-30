@@ -22,7 +22,7 @@ class CoffeSeeder extends Seeder
             [
                 'name' => 'Cappuccino',
                 'description' => 'Cappuccino',
-                'price' => '35',
+                'price' => '35000',
                 'image' => 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=935&q=80',
                 'bean_id' => '1',
                 'created_at' => now(),
@@ -31,7 +31,7 @@ class CoffeSeeder extends Seeder
             [
                 'name' => 'Americano',
                 'description' => 'Americano',
-                'price' => '35',
+                'price' => '35000',
                 'image' => 'https://images.unsplash.com/photo-1531835207745-506a1bc035d8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
                 'bean_id' => '2',
                 'created_at' => now(),
@@ -40,7 +40,7 @@ class CoffeSeeder extends Seeder
             [
                 'name' => 'Latte',
                 'description' => 'Latte',
-                'price' => '40',
+                'price' => '40000',
                 'image' => 'https://images.unsplash.com/photo-1589396575653-c09c794ff6a6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
                 'bean_id' => '2',
                 'created_at' => now(),
