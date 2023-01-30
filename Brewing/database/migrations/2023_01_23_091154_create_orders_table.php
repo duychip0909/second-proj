@@ -15,18 +15,15 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('customer_name');
-            $table->integer('phone_number');
-            $table->string('email');
-            $table->text('address');
-            $table->string('notes');
-            $table->unsignedBigInteger('bean_id');
-            $table->foreign('bean_id')->references('id')->on('beans');
-            $table->unsignedBigInteger('coffee_id');
-            $table->foreign('coffee_id')->references('id')->on('coffees');
-            $table->integer('quantity');
-            $table->integer('options');
-            $table->integer('total_price');
+            $table->unsignedBigInteger('customer_id')->nullable();
+            $table->foreign('customer_id')->references('id')->on('customers');
+            $table->string('order_name');
+            $table->integer('order_phone');
+            $table->string('order_email');
+            $table->text('order_address');
+            $table->string('order_notes')->nullable();
+            $table->boolean('processed')->default(false);
+            $table->integer('order_total');
             $table->timestamps();
         });
     }
