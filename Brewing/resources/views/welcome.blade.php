@@ -60,7 +60,7 @@
                                         <h5 class="text-base font-bold tracking-tight text-gray-900 dark:text-white text-center">
                                             {{$coffee->name}}
                                             @foreach($options as $option)
-                                                <span class="text-xs px-0.5 rounded {{$option == 'Hot' ? 'text-red-600 bg-red-200' : 'text-blue-600 bg-blue-200'}}">{{$option}}</span>
+                                                <span class="text-xs px-0.5 rounded {{$option->value == 1 ? 'text-red-600 bg-red-200' : 'text-blue-600 bg-blue-200'}}">{{$option->key}}</span>
                                             @endforeach
                                         </h5>
                                     </a>

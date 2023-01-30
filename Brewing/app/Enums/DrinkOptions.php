@@ -11,6 +11,6 @@ use BenSampo\Enum\Enum;
  */
 final class DrinkOptions extends Enum
 {
-    const HOT = 'Hot';
-    const ICED = 'Iced';
+    const Hot = 1;
+    const Iced = 2;
 }

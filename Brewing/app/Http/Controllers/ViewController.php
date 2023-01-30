@@ -13,8 +13,8 @@ class ViewController extends Controller
         $totalQuantity = count($carts);
         $subTotal = 0;
         $cupTotal = 0;
-        $coffees = Coffee::all();
-        $options = DrinkOptions::getValues();
+        $coffees = Coffee::all()->where('status', '=', 1);
+        $options = DrinkOptions::getInstances();
         foreach ($carts as $cart) {
             $subTotal += $cart['price'] * $cart['quantity'];
             $cupTotal += $cart['quantity'];
@@ -23,14 +23,8 @@ class ViewController extends Controller
     }
     public function shop()
     {
-        $coffees = Coffee::all()->where('status', '=', 1);
-        $options = DrinkOptions::getValues();
-        $carts = session()->get('cart');
-        $cupTotal = 0;
-        foreach ($carts as $cart) {
-            $cupTotal += $cart['quantity'];
-        }
-        return view('welcome', compact('coffees', 'options', 'cupTotal'));
+        $cartData = $this->getCartData();
+        return view('welcome', $cartData);
     }
 
     public function showCart()

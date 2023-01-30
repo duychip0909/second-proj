@@ -18,6 +18,7 @@
                 </div>
                 <div class="flex mt-10 mb-5">
                     <h3 class="font-semibold text-gray-600 text-xs uppercase w-2/5">Cups</h3>
+                    <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">Option</h3>
                     <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">Quantity</h3>
                     <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">Price</h3>
                     <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">Total</h3>
@@ -32,6 +33,13 @@
                                 <span class="font-bold text-sm">{{$cart['name']}}</span>
                                 <a href="#" data-url="{{route('coffee.removeCup')}}" data-id="{{$cart['id']}}" class="ease transition-all duration-300 font-semibold hover:text-red-500 text-gray-500 text-xs remove-btn">Remove</a>
                             </div>
+                        </div>
+                        <div class="flex justify-center w-1/5">
+                            <select class="block py-2 px-0.5 text-gray-600 w-16 text-sm border">
+                                @foreach($options as $option)
+                                    <option value="{{$option}}">{{$option->key}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="flex justify-center w-1/5 increment-input">
                             <button class="qtyminus" aria-hidden="true">
@@ -68,6 +76,10 @@
                 <div class="pb-5">
                     <label for="promo" class="font-semibold inline-block mb-3 text-sm uppercase">Phone number</label>
                     <input type="text" id="promo" placeholder="Enter your phone number" class="p-2 text-sm w-full">
+                </div>
+                <div class="pb-5">
+                    <label for="promo" class="font-semibold inline-block mb-3 text-sm uppercase">Email</label>
+                    <input type="text" id="promo" placeholder="Enter your email" class="p-2 text-sm w-full">
                 </div>
                 <div class="pb-5">
                     <label for="promo" class="font-semibold inline-block mb-3 text-sm uppercase">Address</label>
