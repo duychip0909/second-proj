@@ -12,9 +12,9 @@ class Orders extends Model
     protected $table = 'orders';
 
     protected  $fillable = [
+        'customer_id',
         'order_name',
         'order_phone',
-        'order_email',
         'order_email',
         'order_address',
         'order_notes',
@@ -26,8 +26,7 @@ class Orders extends Model
         return $this->belongsTo(Customer::class, 'customer_id', 'id');
     }
 
-    public function coffees() {
-        return $this->belongsToMany(Coffee::class, 'coffee_id', 'id')->withPivot('quantity');
+    public function items() {
+        return $this->hasMany(OrderItem::class, "order_id", "id");
     }
-
 }

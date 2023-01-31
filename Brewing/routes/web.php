@@ -5,6 +5,7 @@ use App\Http\Controllers\CoffeeController;
 use App\Http\Controllers\ViewController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CoffeeBeansController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,11 @@ Route::middleware('auth')->prefix('admin')->group(function() {
        Route::get('manage', [CoffeeBeansController::class, 'manage'])->name('coffee-beans.manage');
        Route::post('store', [CoffeeBeansController::class, 'store'])->name('coffee-beans.store');
     });
+
+    Route::group(['prefix' => 'orders'], function() {
+       Route::get('manage', [OrderController::class, 'manage'])->name('order.manage');
+       Route::get('view/{id}', [OrderController::class, 'view'])->name('order.view');
+    });
 });
 
 Route::group(['prefix' => 'coffee'], function() {
@@ -47,4 +53,5 @@ Route::group(['prefix' => 'coffee'], function() {
     Route::get('showCart', [ViewController::class, 'showCart'])->name('coffee.showCart');
     Route::get('updateCart', [ViewController::class, 'updateCart'])->name('coffee.updateCart');
     Route::get('removeCup', [ViewController::class, 'removeCup'])->name('coffee.removeCup');
+    Route::post('order', [ViewController::class, 'order'])->name('coffee.order');
 });

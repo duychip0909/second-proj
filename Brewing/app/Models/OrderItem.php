@@ -13,8 +13,16 @@ class OrderItem extends Model
 
     protected $fillable = [
         'order_id',
-        'order_items',
+        'item_id',
         'bean_id',
         'quantity'
     ];
+
+    public function coffees () {
+        return $this->belongsTo(Coffee::class, 'item_id', 'id');
+    }
+
+    public function order () {
+        return $this->belongsTo(Orders::class);
+    }
 }

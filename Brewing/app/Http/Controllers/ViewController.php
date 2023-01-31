@@ -4,12 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Enums\DrinkOptions;
 use App\Models\Coffee;
+use App\Models\Customer;
+use App\Models\OrderItem;
+use App\Models\Orders;
 use Illuminate\Http\Request;
 
 class ViewController extends Controller
 {
     function getCartData() {
         $carts = session()->get('cart');
+        if (empty($carts)) {
+            $carts = [];
+        }
         $totalQuantity = count($carts);
         $subTotal = 0;
         $cupTotal = 0;
@@ -45,7 +51,7 @@ class ViewController extends Controller
                 'name' => $coffee->name,
                 'price' => $coffee->price,
                 'quantity' => 1,
-                'image' => $coffee->image
+                'image' => $coffee->image,
             ];
         }
         session()->put('cart', $cart);
@@ -82,5 +88,41 @@ class ViewController extends Controller
                'view' => $view
             ]);
         }
+    }
+
+    public function order(Request $request)
+    {
+        $cartData = $this->getCartData();
+        $orderData = $request->all();
+        $orderData['order_total'] = $cartData['subTotal'];
+        $customerData = array();
+        $customerData['customer_name'] = $orderData['order_name'];
+        $customerData['customer_phone'] = $orderData['order_phone'];
+        $customerData['customer_email'] = $orderData['order_email'];
+        $customerData['customer_address'] = $orderData['order_address'];
+        $cartData['subTotal'] = $orderData['order_total'];
+        $customer = Customer::where('customer_phone', '=', $orderData['order_phone'])->first();
+        if ($customer == null) {
+            $newCustomer = new Customer();
+            $newCustomer->fill($customerData);
+            $newCustomer->save();
+            $newCustomer->refresh();
+        }
+        $order = new Orders;
+        $order->fill($orderData);
+        $order->save();
+        $order->refresh();
+        foreach ($cartData['carts'] as $item) {
+            $orderItems = new OrderItem;
+            $bill = array();
+            $bill['order_id'] = $order['id'];
+            $bill['item_id'] = $item['id'];
+            $bill['bean_id'] = $cartData['coffees'][0]->bean_id;
+            $bill['quantity'] = $item['quantity'];
+            $orderItems->fill($bill);
+            $orderItems->save();
+            $orderItems->refresh();
+        }
+        return back();
     }
 }
