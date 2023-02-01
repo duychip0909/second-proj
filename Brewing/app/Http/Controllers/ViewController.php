@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\DrinkOptions;
+use App\Http\Requests\addToCartRequest;
 use App\Models\Coffee;
 use App\Models\Customer;
 use App\Models\OrderItem;
@@ -68,10 +69,10 @@ class ViewController extends Controller
            $carts[$request->id]['quantity'] = $request->quantity;
            session()->put('cart', $carts);
            $cartData = $this->getCartData();
-           $viewName = $request->ajax() ? 'cart-items' : 'cart';
+           $viewName = $request->ajax() ? 'layouts/View/master-cart-layout' : null;
            $view = view($viewName, $cartData)->render();
            return response()->json([
-               'view' => $view
+               'view' => $view,
            ]);
         }
     }
@@ -90,39 +91,51 @@ class ViewController extends Controller
         }
     }
 
-    public function order(Request $request)
+    public function order(addToCartRequest $request)
     {
         $cartData = $this->getCartData();
-        $orderData = $request->all();
-        $orderData['order_total'] = $cartData['subTotal'];
-        $customerData = array();
-        $customerData['customer_name'] = $orderData['order_name'];
-        $customerData['customer_phone'] = $orderData['order_phone'];
-        $customerData['customer_email'] = $orderData['order_email'];
-        $customerData['customer_address'] = $orderData['order_address'];
-        $cartData['subTotal'] = $orderData['order_total'];
-        $customer = Customer::where('customer_phone', '=', $orderData['order_phone'])->first();
-        if ($customer == null) {
-            $newCustomer = new Customer();
-            $newCustomer->fill($customerData);
-            $newCustomer->save();
-            $newCustomer->refresh();
+        $validated = $request->validated();
+        try {
+            if ($validated == null) {
+                toast('Something wrong here!','error','top-right');
+                return back();
+            } else {
+                $orderData = $validated;
+                $orderData['order_total'] = $cartData['subTotal'];
+                $customerData = array();
+                $customerData['customer_name'] = $orderData['order_name'];
+                $customerData['customer_phone'] = $orderData['order_phone'];
+                $customerData['customer_email'] = $orderData['order_email'];
+                $customerData['customer_address'] = $orderData['order_address'];
+                $cartData['subTotal'] = $orderData['order_total'];
+                $customer = Customer::where('customer_phone', '=', $orderData['order_phone'])->first();
+                if ($customer == null) {
+                    $newCustomer = new Customer();
+                    $newCustomer->fill($customerData);
+                    $newCustomer->save();
+                    $newCustomer->refresh();
+                }
+                $order = new Orders;
+                $order->fill($orderData);
+                $order->save();
+                $order->refresh();
+                foreach ($cartData['carts'] as $item) {
+                    $orderItems = new OrderItem;
+                    $bill = array();
+                    $bill['order_id'] = $order['id'];
+                    $bill['item_id'] = $item['id'];
+                    $bill['bean_id'] = $cartData['coffees'][0]->bean_id;
+                    $bill['quantity'] = $item['quantity'];
+                    $orderItems->fill($bill);
+                    $orderItems->save();
+                    $orderItems->refresh();
+                }
+                toast('Order successfully!','success','top-right');
+                return redirect()->route('coffee.shop');
+            }
+        } catch (\Exception $e) {
+            toast('Something wrong!' . $e->getMessage(),'error','top-right');
+            return back();
         }
-        $order = new Orders;
-        $order->fill($orderData);
-        $order->save();
-        $order->refresh();
-        foreach ($cartData['carts'] as $item) {
-            $orderItems = new OrderItem;
-            $bill = array();
-            $bill['order_id'] = $order['id'];
-            $bill['item_id'] = $item['id'];
-            $bill['bean_id'] = $cartData['coffees'][0]->bean_id;
-            $bill['quantity'] = $item['quantity'];
-            $orderItems->fill($bill);
-            $orderItems->save();
-            $orderItems->refresh();
-        }
-        return back();
     }
 }
