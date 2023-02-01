@@ -110,11 +110,12 @@ class ViewController extends Controller
                 $cartData['subTotal'] = $orderData['order_total'];
                 $customer = Customer::where('customer_phone', '=', $orderData['order_phone'])->first();
                 if ($customer == null) {
-                    $newCustomer = new Customer();
-                    $newCustomer->fill($customerData);
-                    $newCustomer->save();
-                    $newCustomer->refresh();
+                    $customer = new Customer();
+                    $customer->fill($customerData);
+                    $customer->save();
+                    $customer->refresh();
                 }
+                $orderData['customer_id'] = $customer->id;
                 $order = new Orders;
                 $order->fill($orderData);
                 $order->save();
@@ -130,6 +131,7 @@ class ViewController extends Controller
                     $orderItems->save();
                     $orderItems->refresh();
                 }
+                session()->forget('cart');
                 toast('Order successfully!','success','top-right');
                 return redirect()->route('coffee.shop');
             }

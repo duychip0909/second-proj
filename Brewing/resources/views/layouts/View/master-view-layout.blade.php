@@ -15,6 +15,5 @@
 {{--    js script--}}
     @include('layouts.View.master-view-js-layout')
     @yield('customScript')
-    @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 </body>
 </html>

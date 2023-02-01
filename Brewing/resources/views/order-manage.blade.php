@@ -4,7 +4,7 @@
         <h5 class="card-header">Coffee Manage</h5>
         <div class="table-responsive text-nowrap">
             <table class="table">
-                <thead>
+                <thead class="text-center">
                 <tr>
                     <th>Order id</th>
                     <th>Customer name</th>
@@ -14,13 +14,17 @@
                     <th>Action</th>
                 </tr>
                 </thead>
-                <tbody class="table-border-bottom-0">
+                <tbody class="table-border-bottom-0 text-center">
                 @foreach($orders as $order)
                     <tr>
                         <td><strong>{{$order->id}}</strong></td>
                         <td>{{$order->order_name}}</td>
                         <td>{{$order->order_phone}}</td>
-                        <td>{{$order->processed}}</td>
+                        <td>
+                            <span class="badge me-1 {{$order->processed == 0 ? 'bg-label-primary' : ($order->processed == 1 ? 'bg-label-warning' : 'bg-label-danger')}}">
+                                {{\App\Enums\OrderStatus::getKey($order->processed)}}
+                            </span>
+                        </td>
                         <td>{{$order->order_total}}</td>
                         <td>
                             <div class="dropdown">
@@ -34,7 +38,7 @@
                                         View
                                     </a>
                                     <a class="dropdown-item" href="#"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                    <button class="dropdown-item" type="button"><i class="bx bx-trash me-1"></i> Delete</button>
+                                    <a href="{{route('order.delete', ['id' => $order->id])}}" class="dropdown-item" type="button"><i class="bx bx-trash me-1"></i> Delete</a>
                                 </div>
                             </div>
                         </td>
@@ -44,6 +48,14 @@
             </table>
         </div>
     </div>
+@endsection
+
+@section('customScript')
+    <script>
+        if(performance.navigation.type == 2){
+            location.reload(true);
+        }
+    </script>
 @endsection
 
 

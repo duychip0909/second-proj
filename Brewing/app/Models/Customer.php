@@ -18,4 +18,6 @@ class Customer extends Model
         'customer_address',
         'customer_points'
     ];
+
+
 }

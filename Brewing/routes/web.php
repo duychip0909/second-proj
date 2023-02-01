@@ -1,11 +1,12 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CoffeeController;
-use App\Http\Controllers\ViewController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CoffeeBeansController;
+use App\Http\Controllers\CoffeeController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ViewController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,11 @@ Route::middleware('auth')->prefix('admin')->group(function() {
     Route::group(['prefix' => 'orders'], function() {
        Route::get('manage', [OrderController::class, 'manage'])->name('order.manage');
        Route::get('view/{id}', [OrderController::class, 'view'])->name('order.view');
+       Route::get('delete/{id}', [OrderController::class, 'delete'])->name('order.delete');
+    });
+
+    Route::group(['prefix' => 'customers'], function () {
+       Route::get('manage', [CustomerController::class, 'manage'])->name('customer.manage');
     });
 });
 

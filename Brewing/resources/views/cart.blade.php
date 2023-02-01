@@ -1,2 +1,4 @@
 @extends('layouts.View.master-view-layout')
-@include('layouts.View.master-cart-layout')
+@section('content')
+    @include('layouts.View.master-cart-layout')
+@endsection

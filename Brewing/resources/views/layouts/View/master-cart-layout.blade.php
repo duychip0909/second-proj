@@ -63,18 +63,30 @@
                 <div class="py-5">
                     <label class="font-medium inline-block mb-3 text-sm uppercase">Name</label>
                     <input type="text" id="promo" name="order_name" placeholder="Enter your name" class="p-2 text-sm w-full">
+                    @error('order_name')
+                    <p class="text-xs text-red-500 mt-0.5">*{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="pb-5">
                     <label for="promo" class="font-semibold inline-block mb-3 text-sm uppercase">Phone number</label>
                     <input type="text" id="promo" name="order_phone" placeholder="Enter your phone number" class="p-2 text-sm w-full">
+                    @error('order_phone')
+                    <p class="text-xs text-red-500 mt-0.5">*{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="pb-5">
                     <label for="promo" class="font-semibold inline-block mb-3 text-sm uppercase">Email</label>
                     <input type="text" id="promo" name="order_email" placeholder="Enter your email" class="p-2 text-sm w-full">
+                    @error('order_email')
+                    <p class="text-xs text-red-500 mt-0.5">*{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="pb-5">
                     <label for="promo" class="font-semibold inline-block mb-3 text-sm uppercase">Address</label>
                     <textarea type="text" id="promo" name="order_address" placeholder="Enter your address (available for Hanoi)" class="p-2 text-sm w-full resize-none" rows="5"></textarea>
+                    @error('order_address')
+                    <p class="text-xs text-red-500 mt-0.5">*{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="">
                     <label for="promo" class="font-semibold inline-block mb-3 text-sm uppercase">Notes</label>

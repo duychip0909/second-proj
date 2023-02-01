@@ -31,4 +31,15 @@ class addToCartRequest extends FormRequest
             'order_notes' => 'nullable'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'order_name.required' => 'Name field can not be null',
+            'order_phone.numeric' => 'Phone number must be number',
+            'order_phone.required' => 'Phone number can not be null',
+            'order_address.required' => 'Address can not be null',
+            'order_email.email' => 'Email must be the validated email'
+        ];
+    }
 }

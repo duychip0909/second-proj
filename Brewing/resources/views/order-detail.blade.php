@@ -29,9 +29,12 @@
                         </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
+                        @php
+                            $i = 1;
+                        @endphp
                         @foreach($order->items as $item)
                             <tr>
-                                <td><strong>{{$item->id}}</strong></td>
+                                <td><strong>{{$i++}}</strong></td>
                                 <td>
                                     <div class="d-flex align-items-center">
                                         <div class="coffee-img me-4">
@@ -43,10 +46,15 @@
                                 <td>{{$item->quantity}}</td>
                                 <td>{{number_format($item->coffees->price)}}đ</td>
                                 <td>
-                                   {{number_format(($item->quantity) * ($item->coffees->price))}}
+                                   {{number_format(($item->quantity) * ($item->coffees->price))}}đ
                                 </td>
                             </tr>
                         @endforeach
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>{{number_format($orderTotal)}}đ</td>
                         </tbody>
                     </table>
                 </div>
