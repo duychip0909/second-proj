@@ -60,4 +60,5 @@ Route::group(['prefix' => 'coffee'], function() {
     Route::get('updateCart', [ViewController::class, 'updateCart'])->name('coffee.updateCart');
     Route::get('removeCup', [ViewController::class, 'removeCup'])->name('coffee.removeCup');
     Route::post('order', [ViewController::class, 'order'])->name('coffee.order');
+    Route::get('search', [ViewController::class, 'search'])->name('coffee.search');
 });

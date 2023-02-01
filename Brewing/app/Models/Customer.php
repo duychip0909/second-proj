@@ -19,5 +19,8 @@ class Customer extends Model
         'customer_points'
     ];
 
-
+    public function orders()
+    {
+        return $this->hasMany(Orders::class, 'customer_id', 'id');
+    }
 }

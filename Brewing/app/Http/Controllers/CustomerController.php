@@ -10,16 +10,10 @@ class CustomerController extends Controller
 {
     public function manage()
     {
-        $customers = Customer::all();
+        $customers = Customer::with(['orders'])->get();
         foreach ($customers as $customer) {
-            $orders = Orders::where('customer_id', '=', $customer->id)->get();
-            $totalOrder = $orders->count();
-            $customer['totalOrder'] = $totalOrder;
-            foreach ($orders as $order) {
-                $totalPrice = 0;
-                $totalPrice += $order->order_total;
-                $customer['grand'] = $totalPrice;
-            }
+            $customer['totalOrder'] = $customer->orders->count();
+            $customer['grand'] = $customer->orders->sum('order_total');
         }
         return view('customer-manage', compact('customers'));
     }

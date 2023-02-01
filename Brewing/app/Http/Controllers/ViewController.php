@@ -9,23 +9,21 @@ use App\Models\Customer;
 use App\Models\OrderItem;
 use App\Models\Orders;
 use Illuminate\Http\Request;
+use GuzzleHttp\Client;
+
 
 class ViewController extends Controller
 {
     function getCartData() {
-        $carts = session()->get('cart');
-        if (empty($carts)) {
-            $carts = [];
-        }
+        $carts = session()->get('cart', []);
         $totalQuantity = count($carts);
-        $subTotal = 0;
-        $cupTotal = 0;
+        $subTotal = array_reduce($carts, function($grand, $cart) {
+            $grand += $cart['quantity'] * $cart['price'];
+            return $grand;
+        });
+        $cupTotal = array_sum(array_column($carts, 'quantity'));
         $coffees = Coffee::all()->where('status', '=', 1);
         $options = DrinkOptions::getInstances();
-        foreach ($carts as $cart) {
-            $subTotal += $cart['price'] * $cart['quantity'];
-            $cupTotal += $cart['quantity'];
-        }
         return compact('carts', 'totalQuantity', 'subTotal', 'cupTotal', 'coffees', 'options');
     }
     public function shop()
@@ -79,65 +77,86 @@ class ViewController extends Controller
 
     public function removeCup(Request $request)
     {
-        if ($request->id) {
-            $carts = session()->get('cart');
-            unset($carts[$request->id]);
-            session()->put('cart', $carts);
-            $cartData = $this->getCartData();
-            $view = view('cart', $cartData)->render();
+        if (!$request->id) {
             return response()->json([
-               'view' => $view
-            ]);
+                'error' => 'Cannot remove item, id missing.'
+            ], 400);
         }
+
+        $carts = session()->get('cart');
+        unset($carts[$request->id]);
+        session()->put('cart', $carts);
+        $cartData = $this->getCartData();
+        $view = view('cart', $cartData)->render();
+        return response()->json([
+           'view' => $view
+        ]);
     }
 
     public function order(addToCartRequest $request)
     {
         $cartData = $this->getCartData();
-        $validated = $request->validated();
+        $validatedData = $request->validated();
         try {
-            if ($validated == null) {
+            if (!$validatedData) {
                 toast('Something wrong here!','error','top-right');
                 return back();
             } else {
-                $orderData = $validated;
-                $orderData['order_total'] = $cartData['subTotal'];
-                $customerData = array();
-                $customerData['customer_name'] = $orderData['order_name'];
-                $customerData['customer_phone'] = $orderData['order_phone'];
-                $customerData['customer_email'] = $orderData['order_email'];
-                $customerData['customer_address'] = $orderData['order_address'];
-                $cartData['subTotal'] = $orderData['order_total'];
-                $customer = Customer::where('customer_phone', '=', $orderData['order_phone'])->first();
-                if ($customer == null) {
-                    $customer = new Customer();
-                    $customer->fill($customerData);
-                    $customer->save();
-                    $customer->refresh();
-                }
-                $orderData['customer_id'] = $customer->id;
-                $order = new Orders;
-                $order->fill($orderData);
-                $order->save();
-                $order->refresh();
+                $customerData = [
+                    'customer_name' => $validatedData['order_name'],
+                    'customer_phone' => $validatedData['order_phone'],
+                    'customer_email' => $validatedData['order_email'],
+                    'customer_address' => $validatedData['order_address']
+                ];
+
+                $customer = Customer::firstOrCreate(
+                    ['customer_phone' => $validatedData['order_phone']],
+                    $customerData
+                );
+
+                $orderData = [
+                    'customer_id' => $customer->id,
+                    'order_total' => $cartData['subTotal'],
+                    'order_name' => $validatedData['order_name'],
+                    'order_phone' => $validatedData['order_phone'],
+                    'order_email' => $validatedData['order_email'],
+                    'order_address' => $validatedData['order_address'],
+                ];
+
+                $order = Orders::create($orderData);
+
                 foreach ($cartData['carts'] as $item) {
-                    $orderItems = new OrderItem;
-                    $bill = array();
-                    $bill['order_id'] = $order['id'];
-                    $bill['item_id'] = $item['id'];
-                    $bill['bean_id'] = $cartData['coffees'][0]->bean_id;
-                    $bill['quantity'] = $item['quantity'];
-                    $orderItems->fill($bill);
-                    $orderItems->save();
-                    $orderItems->refresh();
+                    $orderItemsData = [
+                        'order_id' => $order->id,
+                        'item_id' => $item['id'],
+                        'bean_id' => $cartData['coffees'][0]->bean_id,
+                        'quantity' => $item['quantity'],
+                    ];
+
+                    OrderItem::create($orderItemsData);
                 }
                 session()->forget('cart');
-                toast('Order successfully!','success','top-right');
+                toast('Order placed successfully!','success','top-right');
                 return redirect()->route('coffee.shop');
             }
         } catch (\Exception $e) {
-            toast('Something wrong!' . $e->getMessage(),'error','top-right');
+            toast('Something went wrong!' . $e->getMessage(),'error','top-right');
             return back();
         }
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->all();
+        $coffees = Coffee::where(function ($q) use ($query) {
+            if ($query) {
+                $q->where('name', 'like', "%{$query['query']}%")
+                    ->orWhere('description', 'like', "%{$query['query']}%");
+            }
+        })->get();
+        $subTotal = 0;
+        $cupTotal = 0;
+        $options = DrinkOptions::getInstances();
+        return view('welcome', compact('coffees', 'subTotal', 'cupTotal', 'options'));
     }
 }
