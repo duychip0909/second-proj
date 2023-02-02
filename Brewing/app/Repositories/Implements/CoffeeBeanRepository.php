@@ -13,9 +13,7 @@ class CoffeeBeanRepository extends BaseRepository implements CoffeeBeanRepositor
 
     public function store($data)
     {
-        $record = $this->model->newQuery()->create($data);
-        $record->save();
-        $record->refresh();
+        $record = $this->model->create($data);
         return $record;
     }
 }

@@ -13,9 +13,7 @@ class AdminRepository extends BaseRepository implements AdminRepositoryInterface
 
     public function processRegister($data)
     {
-        $record = $this->model->newQuery()->create($data);
-        $record->save();
-        $record->refresh();
+        $record = $this->model->create($data);
         return $record;
     }
 

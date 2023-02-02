@@ -33,14 +33,10 @@ class CoffeeController extends Controller
 
     public function status($id)
     {
-        $item = Coffee::findOrFail($id);
-        if ($item->status == CoffeeStatus::ACTIVE) {
-            $item->status = CoffeeStatus::INACTIVE;
-        } else {
-            $item->status = CoffeeStatus::ACTIVE;
-        }
-        $item->save();
-        return $item;
+        $coffee = Coffee::find($id);
+        $coffee->status = ($coffee->status == CoffeeStatus::ACTIVE ? CoffeeStatus::INACTIVE : CoffeeStatus::ACTIVE);
+        $coffee->save();
+        return $coffee;
     }
 
     public function manage()
@@ -53,7 +49,7 @@ class CoffeeController extends Controller
         try {
             $validated = $request->validated();
             $this->coffeeService->store($validated);
-            if ($validated == null) {
+            if (!$validated) {
                 return back();
             }
             toast()->success('Successfully', 'Add coffee successfully');
@@ -69,7 +65,7 @@ class CoffeeController extends Controller
         try {
             $validated = $request->validated();
             $this->coffeeService->update($validated, $id);
-            if ($validated == null) {
+            if (!$validated) {
                 return back();
             }
             toast()->success('Successfully', 'Add coffee successfully');

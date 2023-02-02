@@ -56,7 +56,7 @@ class ViewController extends Controller
         session()->put('cart', $cart);
         $cartData = $this->getCartData();
         return response()->json([
-            'view' => view('welcome', $cartData)->render()
+            'view' => view('layouts.View.navbar-view', $cartData)->render()
         ]);
     }
 
@@ -77,20 +77,16 @@ class ViewController extends Controller
 
     public function removeCup(Request $request)
     {
-        if (!$request->id) {
+        if ($request->id) {
+            $carts = session()->get('cart');
+            unset($carts[$request->id]);
+            session()->put('cart', $carts);
+            $cartData = $this->getCartData();
+            $view = view('cart', $cartData)->render();
             return response()->json([
-                'error' => 'Cannot remove item, id missing.'
-            ], 400);
+               'view' => $view
+            ]);
         }
-
-        $carts = session()->get('cart');
-        unset($carts[$request->id]);
-        session()->put('cart', $carts);
-        $cartData = $this->getCartData();
-        $view = view('cart', $cartData)->render();
-        return response()->json([
-           'view' => $view
-        ]);
     }
 
     public function order(addToCartRequest $request)

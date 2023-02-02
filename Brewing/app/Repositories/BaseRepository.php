@@ -18,24 +18,19 @@ class BaseRepository implements BaseRepositoryInterface
 
     public function store($data)
     {
-        dd($this->model);
-        $record = $this->model->newQuery()->create($data);
-        $record->save();
-        $record->refresh();
+        $record = $this->model->create($data);
         return $record;
     }
 
     public function edit($id)
     {
-        return $this->model->where('id', '=', $id)->first();
+        return $this->model->find($id);
     }
 
     public function update($data, $id)
     {
-        $record = $this->model->where('id', '=', $id)->first();
-        $record->fill($data);
-        $record->save();
-        $record->refresh();
+        $record = $this->model->find($id);
+        $record->update($data);
         return $record;
     }
 }

@@ -2,7 +2,7 @@
     <h5 class="card-header">Coffee Manage</h5>
     <div class="table-responsive text-nowrap">
         <table class="table">
-            <thead>
+            <thead class="">
             <tr>
                 <th>Coffee name</th>
                 <th>Coffee description</th>
@@ -18,7 +18,7 @@
                 <tr>
                     <td><strong>{{$coffee->name}}</strong></td>
                     <td>{{$coffee->description}}</td>
-                    <td>{{$coffee->price}}</td>
+                    <td>{{number_format($coffee->price)}}</td>
                     <td>
                         <div class="coffee-img">
                             <img src="{{$coffee->image}}" alt="">
@@ -26,7 +26,7 @@
                     </td>
                     <td>{{$coffee->beans->bean}}</td>
                     <td>
-                        <div class="form-check form-switch mb-2">
+                        <div class="form-check form-switch m-0">
                             <input class="form-check-input coffeeStatus" {{$coffee->status == 1 ? 'checked' : ''}} data-action="{{route('coffee.status', ['id' => $coffee->id])}}" type="checkbox">
                         </div>
                     </td>

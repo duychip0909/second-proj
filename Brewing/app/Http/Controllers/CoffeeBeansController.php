@@ -25,7 +25,7 @@ class CoffeeBeansController extends Controller
         try {
             $validated = $request->validated();
             $this->coffeeBeanService->store($validated);
-            if ($validated == null) {
+            if (!$validated) {
                 toast()->warning('Fail', 'Something wrong here');
                 return back();
             }

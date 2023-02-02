@@ -26,4 +26,5 @@ class CoffeeBeansService implements ICoffeeBeansService
         }
         return $this->coffeeBeanRepo->store($data);
     }
+
 }

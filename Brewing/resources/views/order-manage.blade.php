@@ -1,7 +1,7 @@
 @extends('layouts.admin.master')
 @section('content')
     <div class="card">
-        <h5 class="card-header">Coffee Manage</h5>
+        <h5 class="card-header">Order Manage</h5>
         <div class="table-responsive text-nowrap">
             <table class="table">
                 <thead class="text-center">
@@ -25,7 +25,7 @@
                                 {{\App\Enums\OrderStatus::getKey($order->processed)}}
                             </span>
                         </td>
-                        <td>{{$order->order_total}}</td>
+                        <td>{{number_format($order->order_total)}}</td>
                         <td>
                             <div class="dropdown">
                                 <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown" aria-expanded="false"><i class="bx bx-dots-vertical-rounded"></i></button>
@@ -37,7 +37,7 @@
                                         </svg>
                                         View
                                     </a>
-                                    <a class="dropdown-item" href="#"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                    <a class="dropdown-item" href="{{route('order.edit', ['id' => $order->id])}}"><i class="bx bx-edit-alt me-1"></i> Edit</a>
                                     <a href="{{route('order.delete', ['id' => $order->id])}}" class="dropdown-item" type="button"><i class="bx bx-trash me-1"></i> Delete</a>
                                 </div>
                             </div>

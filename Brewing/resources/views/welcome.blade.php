@@ -39,7 +39,7 @@
                                         @endforeach
                                     </h5>
                                 </a>
-                                <div class="flex items-center justify-between text-base mt-4">
+                                <div class="flex items-center justify-between text-base mt-4 relative">
                                     <span class="font-medium text-gray-900 dark:text-white">{{number_format($coffee->price)}}đ</span>
                                     <button data-url="{{route('coffee.addToCart', ['id' => $coffee->id])}}" class="px-2 py-0.5 transition ease-in-out duration-200 hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none btnAddToCart">Add
                                         to cart
@@ -52,4 +52,16 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('customScript')
+    <script>
+        $(document).on('click', '.btnAddToCart', function() {
+            let btn = $(this);
+            url = btn.data('url');
+            $.getJSON(url, function(res) {
+                $('.navbar').replaceWith(res.view);
+            });
+        });
+    </script>
 @endsection

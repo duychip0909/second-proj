@@ -9,4 +9,5 @@ interface BaseRepositoryInterface
     public function edit($id);
 
     public function update($data, $id);
+
 }

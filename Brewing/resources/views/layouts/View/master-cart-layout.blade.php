@@ -20,7 +20,7 @@
                         </div>
                         <div class="flex flex-col justify-between ml-4 flex-grow">
                             <span class="font-bold text-sm">{{$cart['name']}}</span>
-                            <a href="#" data-url="{{route('coffee.removeCup')}}" data-id="{{$cart['id']}}" class="ease transition-all duration-300 font-semibold hover:text-red-500 text-gray-500 text-xs remove-btn">Remove</a>
+                            <a href="#" data-id="{{$cart['id']}}" class="ease transition-all duration-300 font-semibold hover:text-red-500 text-gray-500 text-xs remove-btn">Remove</a>
                         </div>
                     </div>
                     <div class="flex justify-center w-1/5">
@@ -35,7 +35,7 @@
                             <svg class="fill-current text-gray-600 w-3" viewBox="0 0 448 512"><path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
                             </svg>
                         </button>
-                        <input data-url="{{route('coffee.updateCart')}}" data-id="{{$cart['id']}}" class="quantity-input mx-2 border text-center w-10 qty" type="number" name="qty" min="1" max="999" step="1" value="{{$cart['quantity']}}">
+                        <input data-id="{{$cart['id']}}" class="quantity-input mx-2 border text-center w-10 qty" type="number" name="qty" min="1" max="999" step="1" value="{{$cart['quantity']}}">
                         <button class="qtyplus" aria-hidden="true">
                             <svg class="fill-current text-gray-600 w-3" viewBox="0 0 448 512">
                                 <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
@@ -104,60 +104,6 @@
         </div>
     </div>
 </div>
-
-@section('customScript')
-    <script>
-        var updateCartUrl = '{{ route('coffee.updateCart') }}';
-        var deleteCartUrl = '{{route('coffee.removeCup')}}';
-        $(document).on('click', '.qtyplus', function (e) {
-            let input = $(this).parents('.increment-input').find('.quantity-input');
-            var max = Number(input.attr('max'));
-            let current = Number(input.val());
-            let newVal = (current + Number(input.attr('step')));
-            if (newVal > max) newVal = max;
-            input.val(Number(newVal));
-            input.trigger('change');
-            e.preventDefault();
-        });
-
-        $(document).on('click', '.qtyminus', function (e) {
-            let input = $(this).parents('.increment-input').find('.quantity-input');
-            console.log(input);
-            var min = Number(input.attr('min'));
-            let current = Number(input.val());
-            let newVal = (current - input.attr('step'));
-            if (newVal < min) {
-                newVal = min;
-            }
-
-            input.val(newVal);
-            input.trigger('change');
-            console.log('[change]', newVal);
-            e.preventDefault();
-        });
-
-        function addToCart() {
-            let quantityInput = $(this);
-            let id = quantityInput.data('id');
-            let quantity = quantityInput.val();
-            $.getJSON(`${updateCartUrl}?id=${id}&quantity=${quantity}`, function (response) {
-                $('#cart-wrapper').replaceWith($(response.view));
-            })
-        }
-
-        function deleteCup(e) {
-            e.preventDefault();
-            let removeBtn = $(this);
-            let id = removeBtn.data('id');
-            $.getJSON(`${deleteCartUrl}?id=${id}`, function (response) {
-                $('#cart-wrapper').replaceWith($(response.view));
-            })
-        }
-
-        $(document).on('change', '.quantity-input', addToCart);
-        $(document).on('click', '.remove-btn', deleteCup);
-    </script>
-@endsection
 
 
 

@@ -31,14 +31,14 @@ class AdminController extends Controller
         try {
             $validated = $request->validated();
             $this->adminService->processRegister($validated);
-            if ($validated == null) {
+            if (!$validated) {
                 toast('Create account fail','error');
                 return back();
             }
             toast('Create account successfully','success');
             return redirect()->route('login-form');
-        } catch (Exception $e) {
-            toast('Create account fail','error');
+        } catch (\Exception $e) {
+            toast('Create account fail' . $e->getMessage(),'error');
             return back();
         }
     }
