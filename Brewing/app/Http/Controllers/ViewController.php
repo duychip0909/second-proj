@@ -32,6 +32,22 @@ class ViewController extends Controller
         return view('welcome', $cartData);
     }
 
+    public function priceHtl()
+    {
+        $cartData = $this->getCartData();
+        $coffees = Coffee::orderBy('price', 'DESC')->get();
+        $cartData['coffees'] = $coffees;
+        return view('welcome', $cartData);
+    }
+
+    public function priceLth()
+    {
+        $cartData = $this->getCartData();
+        $coffees = Coffee::orderBy('price', 'ASC')->get();
+        $cartData['coffees'] = $coffees;
+        return view('welcome', $cartData);
+    }
+
     public function showCart()
     {
         $cartData = $this->getCartData();
@@ -56,37 +72,9 @@ class ViewController extends Controller
         session()->put('cart', $cart);
         $cartData = $this->getCartData();
         return response()->json([
-            'view' => view('layouts.View.navbar-view', $cartData)->render()
+            'view' => view('layouts.View.navbar-view', $cartData)->render(),
+            'name' => $cart[$id]['name']
         ]);
-    }
-
-    public function updateCart(Request $request)
-    {
-        if ($request->id && $request->quantity) {
-           $carts = session()->get('cart');
-           $carts[$request->id]['quantity'] = $request->quantity;
-           session()->put('cart', $carts);
-           $cartData = $this->getCartData();
-           $viewName = $request->ajax() ? 'layouts/View/master-cart-layout' : null;
-           $view = view($viewName, $cartData)->render();
-           return response()->json([
-               'view' => $view,
-           ]);
-        }
-    }
-
-    public function removeCup(Request $request)
-    {
-        if ($request->id) {
-            $carts = session()->get('cart');
-            unset($carts[$request->id]);
-            session()->put('cart', $carts);
-            $cartData = $this->getCartData();
-            $view = view('cart', $cartData)->render();
-            return response()->json([
-               'view' => $view
-            ]);
-        }
     }
 
     public function order(addToCartRequest $request)
@@ -144,12 +132,8 @@ class ViewController extends Controller
     public function search(Request $request)
     {
         $query = $request->all();
-        $coffees = Coffee::where(function ($q) use ($query) {
-            if ($query) {
-                $q->where('name', 'like', "%{$query['query']}%")
-                    ->orWhere('description', 'like', "%{$query['query']}%");
-            }
-        })->get();
+        $coffees = Coffee::search($query);
+        dd($coffees);
         $subTotal = 0;
         $cupTotal = 0;
         $options = DrinkOptions::getInstances();

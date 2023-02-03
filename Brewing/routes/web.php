@@ -60,8 +60,8 @@ Route::group(['prefix' => 'coffee'], function() {
     Route::get('/', [ViewController::class, 'shop'])->name('coffee.shop');
     Route::get('addToCart/{id}', [ViewController::class, 'addToCart'])->name('coffee.addToCart');
     Route::get('showCart', [ViewController::class, 'showCart'])->name('coffee.showCart');
-    Route::get('updateCart', [ViewController::class, 'updateCart'])->name('coffee.updateCart');
-    Route::get('removeCup', [ViewController::class, 'removeCup'])->name('coffee.removeCup');
     Route::post('order', [ViewController::class, 'order'])->name('coffee.order');
     Route::get('search', [ViewController::class, 'search'])->name('coffee.search');
+    Route::get('priceHtl', [ViewController::class, 'priceHtl'])->name('price-htl');
+    Route::get('priceLth', [ViewController::class, 'priceLth'])->name('price-lth');
 });

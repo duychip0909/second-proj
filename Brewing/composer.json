@@ -7,6 +7,7 @@
     "require": {
         "php": "^8.0.2",
         "bensampo/laravel-enum": "^6.2",
+        "elasticsearch/elasticsearch": "^8.6",
         "guzzlehttp/guzzle": "^7.5",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
@@ -15,6 +16,7 @@
         "realrashid/sweet-alert": "^5.1"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.7",
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.0.1",

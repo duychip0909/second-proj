@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Brewing</title>
     @vite('resources/css/app.css')
+    @livewireStyles
     <link rel="stylesheet" href="{{asset('css/styles.css')}}">
 </head>
 <body class="bg-slate-100">
@@ -14,6 +15,7 @@
 
 {{--    js script--}}
     @include('layouts.View.master-view-js-layout')
+    @livewireScripts
     @yield('customScript')
 </body>
 </html>

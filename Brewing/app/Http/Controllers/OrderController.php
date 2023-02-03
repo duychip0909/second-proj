@@ -31,9 +31,9 @@ class OrderController extends Controller
 
     public function delete($id)
     {
-        Orders::findOrFail($id)->delete();
+        Orders::find($id)->delete();
         $orders = $this->getAllOrder();
-        return view('order-manage', compact('orders'));
+        return redirect(route('order.manage', compact('orders')));
     }
 
     public function edit($id)
