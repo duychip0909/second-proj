@@ -32,6 +32,12 @@ class ViewController extends Controller
         return view('welcome', $cartData);
     }
 
+    public function detail($id)
+    {
+        $cartData = $this->getCartData();
+        return view('coffee-detail', $cartData);
+    }
+
     public function priceHtl()
     {
         $cartData = $this->getCartData();
@@ -127,16 +133,5 @@ class ViewController extends Controller
             toast('Something went wrong!' . $e->getMessage(),'error','top-right');
             return back();
         }
-    }
-
-    public function search(Request $request)
-    {
-        $query = $request->all();
-        $coffees = Coffee::search($query);
-        dd($coffees);
-        $subTotal = 0;
-        $cupTotal = 0;
-        $options = DrinkOptions::getInstances();
-        return view('welcome', compact('coffees', 'subTotal', 'cupTotal', 'options'));
     }
 }

@@ -59,6 +59,7 @@ Route::middleware('auth')->prefix('admin')->group(function() {
 Route::group(['prefix' => 'coffee'], function() {
     Route::get('/', [ViewController::class, 'shop'])->name('coffee.shop');
     Route::get('addToCart/{id}', [ViewController::class, 'addToCart'])->name('coffee.addToCart');
+    Route::get('detail/{id}', [ViewController::class, 'detail'])->name('coffee.detail');
     Route::get('showCart', [ViewController::class, 'showCart'])->name('coffee.showCart');
     Route::post('order', [ViewController::class, 'order'])->name('coffee.order');
     Route::get('search', [ViewController::class, 'search'])->name('coffee.search');

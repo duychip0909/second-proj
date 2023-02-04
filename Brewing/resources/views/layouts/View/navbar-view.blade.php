@@ -1,4 +1,4 @@
-<section class="shadow-md bg-white navbar">
+<section class="shadow-md bg-white navbar rounded-lg">
     <div class="container mx-auto">
         <div class="navbar flex justify-between items-center h-32">
             <div class="logo">

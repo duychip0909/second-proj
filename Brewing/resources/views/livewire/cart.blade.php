@@ -1,5 +1,5 @@
 <div class="container mx-auto mt-10" id="cart-wrapper">
-    <div class="flex shadow-md my-10">
+    <div class="flex shadow-md my-10  overflow-hidden">
         <div class="w-3/4 bg-white px-10 py-10">
             <div class="flex justify-between border-b pb-8">
                 <h1 class="font-semibold text-2xl">Order Cart</h1>
@@ -12,9 +12,9 @@
                 <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">Total</h3>
             </div>
             @foreach($carts as $cart)
-                <div class="ease-in-out transition-all duration-300 flex items-center hover:bg-gray-100 -mx-8 px-6 py-5 cup">
+                <div class="ease-in-out transition-all duration-300 flex items-center hover:bg-gray-100 -mx-8 px-6 py-5 cup ">
                     <div class="flex w-2/5"> <!-- product -->
-                        <div class="w-24 h-24">
+                        <div class="w-24 h-24  overflow-hidden">
                             <img class="w-full h-full object-cover aspect-square" src="{{$cart['image']}}" alt="">
                         </div>
                         <div class="flex flex-col justify-between ml-4 flex-grow">
@@ -23,7 +23,7 @@
                         </div>
                     </div>
                     <div class="flex justify-center w-1/5">
-                        <select class="block py-2 px-0.5 text-gray-600 w-16 text-sm border">
+                        <select class="block py-2 px-0.5 text-gray-600 w-16 text-sm border ">
                             @foreach($options as $option)
                                 <option value="{{$option}}">{{$option->key}}</option>
                             @endforeach
@@ -34,7 +34,7 @@
                             <svg class="fill-current text-gray-600 w-3" viewBox="0 0 448 512"><path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
                             </svg>
                         </button>
-                        <input data-id="{{$cart['id']}}" class="quantity-input mx-2 border text-center w-10 qty" type="number" name="qty" min="1" max="999" step="1" value="{{$cart['quantity']}}">
+                        <input data-id="{{$cart['id']}}" class=" quantity-input mx-2 border text-center w-10 qty" type="number" name="qty" min="1" max="999" step="1" value="{{$cart['quantity']}}">
                         <button class="qtyplus" aria-hidden="true">
                             <svg class="fill-current text-gray-600 w-3" viewBox="0 0 448 512">
                                 <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
@@ -60,35 +60,35 @@
                 @csrf
                 <div class="py-5">
                     <label class="font-medium inline-block mb-3 text-sm uppercase">Name</label>
-                    <input type="text" id="promo" name="order_name" placeholder="Enter your name" class="p-2 text-sm w-full">
+                    <input type="text" id="promo" name="order_name" placeholder="Enter your name" class="p-2 text-sm w-full ">
                     @error('order_name')
                     <p class="text-xs text-red-500 mt-0.5">*{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="pb-5">
                     <label for="promo" class="font-semibold inline-block mb-3 text-sm uppercase">Phone number</label>
-                    <input type="text" id="promo" name="order_phone" placeholder="Enter your phone number" class="p-2 text-sm w-full">
+                    <input type="text" id="promo" name="order_phone" placeholder="Enter your phone number" class="p-2 text-sm w-full ">
                     @error('order_phone')
                     <p class="text-xs text-red-500 mt-0.5">*{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="pb-5">
                     <label for="promo" class="font-semibold inline-block mb-3 text-sm uppercase">Email</label>
-                    <input type="text" id="promo" name="order_email" placeholder="Enter your email" class="p-2 text-sm w-full">
+                    <input type="text" id="promo" name="order_email" placeholder="Enter your email" class="p-2 text-sm w-full ">
                     @error('order_email')
                     <p class="text-xs text-red-500 mt-0.5">*{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="pb-5">
                     <label for="promo" class="font-semibold inline-block mb-3 text-sm uppercase">Address</label>
-                    <textarea type="text" id="promo" name="order_address" placeholder="Enter your address (available for Hanoi)" class="p-2 text-sm w-full resize-none" rows="5"></textarea>
+                    <textarea type="text" id="promo" name="order_address" placeholder="Enter your address (available for Hanoi)" class=" p-2 text-sm w-full resize-none" rows="5"></textarea>
                     @error('order_address')
                     <p class="text-xs text-red-500 mt-0.5">*{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="">
                     <label for="promo" class="font-semibold inline-block mb-3 text-sm uppercase">Notes</label>
-                    <textarea type="text" id="promo" name="order_notes" placeholder="Enter your notes" class="p-2 text-sm w-full resize-none" rows="5"></textarea>
+                    <textarea type="text" id="promo" name="order_notes" placeholder="Enter your notes" class=" p-2 text-sm w-full resize-none" rows="5"></textarea>
                 </div>
                 <button class="bg-red-500 hover:bg-red-600 px-5 py-2 text-sm text-white uppercase hidden">Apply</button>
                 <div class="border-t mt-8">
