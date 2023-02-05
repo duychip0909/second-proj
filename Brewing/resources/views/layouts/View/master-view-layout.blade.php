@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Brewing</title>
     @vite('resources/css/app.css')
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+    />
     @livewireStyles
     <link rel="stylesheet" href="{{asset('css/styles.css')}}">
 </head>

@@ -12,28 +12,60 @@
         <div class="menu w-full shadow ml-8 bg-white ">
             <div class="grid grid-cols-4 gap-8 p-8">
                 <div class="shadow">
-                    <img class="aspect-square object-cover" src="https://images.unsplash.com/photo-1596078841242-12f73dc697c6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80" alt="">
+                    <img class="aspect-square object-cover" src="{{$coffee->image}}" alt="">
                 </div>
                 <div class="col-span-3 flex flex-col justify-between">
-                    <h5 class="coffee-name uppercase text-3xl">americano</h5>
-                    <h5 class="coffee-price uppercase text-2xl">45,000đ</h5>
+                    <h5 class="coffee-name uppercase text-3xl">{{$coffee->name}}</h5>
+                    <h5 class="coffee-price uppercase text-2xl">{{number_format($coffee->price)}} đ</h5>
                     <label for="option" class="block">Option:</label>
-                    <select name="option" id="">
-                        <option value="0">Hot</option>
-                        <option value="1">Iced</option>
+                    <select name="option" id="" class="block py-2 px-0.5 text-gray-600 w-16 text-sm border w-40">
+                        @foreach($options as $option)
+                            <option value="{{$option}}">{{$option->key}}</option>
+                        @endforeach
                     </select>
                     <label for="quantity" class="block">Quantity:</label>
-                    <input type='number'>
+                    <input type='number' class="w-16 increment-input border p-1" min="1" max="999" step="1" value="1">
                     <button data-url="http://127.0.0.1:8000/coffee/addToCart/1" class="w-64 block px-16 py-2 transition ease-in-out duration-200 hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none btnAddToCart">Add
                         to cart
                     </button>
                 </div>
             </div>
             <div class="description p-8 pt-0">
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                <p>{{$coffee->description}}</p>
             </div>
-            <div class="related-cups">
-
+            <div class="related-cups p-8">
+                <h5 class="uppercase">Sản phẩm liên quan</h5>
+                <div class="content">
+                    <div class="swiper relatedCups">
+                        <div class="swiper-wrapper">
+                            @foreach($coffees as $coffee)
+                                <div class="swiper-slide">
+                                    <div class="w-full max-w-sm bg-white  overflow-hidden border border-gray-200 hover:shadow dark:bg-gray-200 dark:border-gray-200 drinks grid-item">
+                                        <a href="{{route('coffee.detail', ['id' => $coffee->id])}}" class="block drinks-img-wrapper w-full h-full overflow-hidden ">
+                                            <img class="w-full h-full object-cover drinks-img" src="{{$coffee->image}}" alt="product image" />
+                                        </a>
+                                        <div class="p-3">
+                                            <a href="#">
+                                                <h5 class="text-base font-bold tracking-tight text-gray-900 dark:text-white text-center coffee-name">
+                                                    {{$coffee->name}}
+                                                    @foreach($options as $option)
+                                                        <span class="text-xs px-0.5 rounded {{$option->value == 1 ? 'text-red-600 bg-red-200' : 'text-blue-600 bg-blue-200'}}">{{$option->key}}</span>
+                                                    @endforeach
+                                                </h5>
+                                            </a>
+                                            <div class="flex items-center justify-between text-base mt-4 relative">
+                                                <span class="font-medium text-gray-900 dark:text-white">{{number_format($coffee->price)}}đ</span>
+                                                <button data-url="{{route('coffee.addToCart', ['id' => $coffee->id])}}" class="px-2 py-0.5 transition ease-in-out duration-200 hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none btnAddToCart">Add
+                                                    to cart
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

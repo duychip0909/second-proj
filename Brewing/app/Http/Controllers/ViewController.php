@@ -35,7 +35,8 @@ class ViewController extends Controller
     public function detail($id)
     {
         $cartData = $this->getCartData();
-        return view('coffee-detail', $cartData);
+        $coffee = Coffee::find($id);
+        return view('coffee-detail', $cartData, compact('coffee'));
     }
 
     public function priceHtl()
