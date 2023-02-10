@@ -52,3 +52,21 @@
         </div>
     </section>
 @endsection
+
+@section('customScript')
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: {{route('coffee.order')}},
+                type: 'POST',
+                data: { CSRF: getCSRFTokenValue()},
+                success: function (data) {
+                    if (data.event === 'Success') {
+                        console.log('helllo ');
+                    }
+                }
+            });
+        });
+    </script>
+@endsection
+

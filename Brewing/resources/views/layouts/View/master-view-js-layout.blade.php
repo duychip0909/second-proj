@@ -3,6 +3,7 @@
 <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/needim/noty@77268c46/lib/noty.min.js"></script>
 <script>
     const Toast = Swal.mixin({
         toast: true,
@@ -67,6 +68,8 @@
         speed: 800,
         loop: true
     });
+
+
 
     // var $grid = $('.isotope-grid').isotope({
     //     itemSelector: '.grid-item',

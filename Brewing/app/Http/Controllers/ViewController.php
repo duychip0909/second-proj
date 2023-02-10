@@ -10,6 +10,7 @@ use App\Models\OrderItem;
 use App\Models\Orders;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use Noty;
 
 
 class ViewController extends Controller
@@ -127,8 +128,12 @@ class ViewController extends Controller
                     OrderItem::create($orderItemsData);
                 }
                 session()->forget('cart');
-                toast('Order placed successfully!','success','top-right');
-                return redirect()->route('coffee.shop');
+//                toast('Order placed successfully!','success','top-right');
+                $res = response()->json([
+                    'event' => 'Success',
+                    'data' => $order
+                ]);
+                return redirect()->route('coffee.shop', compact('res'));
             }
         } catch (\Exception $e) {
             toast('Something went wrong!' . $e->getMessage(),'error','top-right');

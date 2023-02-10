@@ -10,6 +10,7 @@
         href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
     />
     @livewireStyles
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/needim/noty@77268c46/lib/noty.css">
     <link rel="stylesheet" href="{{asset('css/styles.css')}}">
 </head>
 <body class="bg-slate-100">
