@@ -17,7 +17,7 @@
             @foreach($coffees as $coffee)
                 <tr>
                     <td><strong>{{$coffee->name}}</strong></td>
-                    <td>{{$coffee->description}}</td>
+                    <td class="text-wrap">{{$coffee->description}}</td>
                     <td>{{number_format($coffee->price)}}</td>
                     <td>
                         <div class="coffee-img">
