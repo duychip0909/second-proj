@@ -29,11 +29,13 @@ class OrderController extends Controller
         return view('order-detail', compact('order', 'orderTotal'));
     }
 
-    public function delete($id)
+    public function delete(Request $request)
     {
+        $id = $request->id;
         Orders::find($id)->delete();
-        $orders = $this->getAllOrder();
-        return redirect(route('order.manage', compact('orders')));
+        return response()->json([
+            'mess' => 'thanh cong'
+        ]);
     }
 
     public function edit($id)

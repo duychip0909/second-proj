@@ -38,7 +38,7 @@
                                         View
                                     </a>
                                     <a class="dropdown-item" href="{{route('order.edit', ['id' => $order->id])}}"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                    <a href="{{route('order.delete', ['id' => $order->id])}}" class="dropdown-item" type="button"><i class="bx bx-trash me-1"></i> Delete</a>
+                                    <a href="javascript:;" data-id="{{$order->id}}" class="dropdown-item trashBtn" type="button"><i class="bx bx-trash me-1"></i> Delete</a>
                                 </div>
                             </div>
                         </td>
@@ -55,6 +55,22 @@
         if(performance.navigation.type == 2){
             location.reload(true);
         }
+
+        $('.trashBtn').on('click', function (e) {
+            e.preventDefault();
+            let id = $(this).data('id');
+            $.ajax({
+                type: 'get',
+                dataType: 'json',
+                data: {
+                    id: id
+                },
+                url: '{{route('order.delete')}}',
+                success: function () {
+                    $(`tr td .dropdown .trashBtn[data-id=${id}]`).closest('tr').fadeOut();
+                }
+            })
+        });
     </script>
 @endsection
 

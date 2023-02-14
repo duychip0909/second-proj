@@ -45,7 +45,7 @@ Route::middleware('auth')->prefix('admin')->group(function() {
     Route::group(['prefix' => 'orders'], function() {
        Route::get('manage', [OrderController::class, 'manage'])->name('order.manage');
        Route::get('view/{id}', [OrderController::class, 'view'])->name('order.view');
-       Route::get('delete/{id}', [OrderController::class, 'delete'])->name('order.delete');
+       Route::get('delete', [OrderController::class, 'delete'])->name('order.delete');
        Route::get('edit/{id}', [OrderController::class, 'edit'])->name('order.edit');
        Route::get('editQuantityCart', [OrderController::class, 'editQuantityCart'])->name('editQuantityCart');
        Route::get('deleteCupCart', [OrderController::class, 'deleteCupCart'])->name('deleteCupCart');
