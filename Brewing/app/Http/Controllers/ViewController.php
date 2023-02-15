@@ -10,6 +10,7 @@ use App\Models\OrderItem;
 use App\Models\Orders;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\DB;
 use Noty;
 
 
@@ -139,5 +140,16 @@ class ViewController extends Controller
             toast('Something went wrong!' . $e->getMessage(),'error','top-right');
             return back();
         }
+    }
+
+    public function searching(Request $request)
+    {
+        $q = $request->q;
+        $coffees = DB::table('coffees')->where('name', 'like', "%$q%")->get();
+        $view = view('searchBox', compact('coffees'))->render();
+        return response()->json([
+            'view' => $view,
+            'records' => $coffees
+        ]);
     }
 }

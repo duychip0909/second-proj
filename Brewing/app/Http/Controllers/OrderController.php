@@ -29,9 +29,9 @@ class OrderController extends Controller
         return view('order-detail', compact('order', 'orderTotal'));
     }
 
-    public function delete(Request $request)
+    public function delete($id)
     {
-        $id = $request->id;
+//        $id = $request->id;
         Orders::find($id)->delete();
         return response()->json([
             'mess' => 'thanh cong'

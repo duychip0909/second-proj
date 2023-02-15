@@ -51,26 +51,35 @@
 @endsection
 
 @section('customScript')
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
+        $('.trashBtn').on('click', function (e) {
+            let id = $(this).data('id');
+            e.preventDefault();
+            axios.get(`/admin/orders/delete/${id}`).then(function () {
+                $(`tr td .dropdown .trashBtn[data-id=${id}]`).closest('tr').fadeOut();
+            });
+        })
+
         if(performance.navigation.type == 2){
             location.reload(true);
         }
 
-        $('.trashBtn').on('click', function (e) {
-            e.preventDefault();
-            let id = $(this).data('id');
-            $.ajax({
-                type: 'get',
-                dataType: 'json',
-                data: {
-                    id: id
-                },
-                url: '{{route('order.delete')}}',
-                success: function () {
-                    $(`tr td .dropdown .trashBtn[data-id=${id}]`).closest('tr').fadeOut();
-                }
-            })
-        });
+        {{--$('.trashBtn').on('click', function (e) {--}}
+        {{--    e.preventDefault();--}}
+        {{--    let id = $(this).data('id');--}}
+        {{--    $.ajax({--}}
+        {{--        type: 'get',--}}
+        {{--        dataType: 'json',--}}
+        {{--        data: {--}}
+        {{--            id: id--}}
+        {{--        },--}}
+        {{--        url: '{{route('order.delete')}}',--}}
+        {{--        success: function () {--}}
+        {{--            $(`tr td .dropdown .trashBtn[data-id=${id}]`).closest('tr').fadeOut();--}}
+        {{--        }--}}
+        {{--    })--}}
+        {{--});--}}
     </script>
 @endsection
 
