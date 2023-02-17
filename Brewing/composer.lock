@@ -764,16 +764,16 @@
         },
         {
             "name": "elasticsearch/elasticsearch",
-            "version": "v8.6.1",
+            "version": "v8.6.2",
             "source": {
                 "type": "git",
                 "url": "git@github.com:elastic/elasticsearch-php.git",
-                "reference": "b3af4309bc73fa3b2a1e19f04f9f201916c11417"
+                "reference": "71c023ae89d4ce3ee6230e158c2368ae4b4b957b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/elastic/elasticsearch-php/zipball/b3af4309bc73fa3b2a1e19f04f9f201916c11417",
-                "reference": "b3af4309bc73fa3b2a1e19f04f9f201916c11417",
+                "url": "https://api.github.com/repos/elastic/elasticsearch-php/zipball/71c023ae89d4ce3ee6230e158c2368ae4b4b957b",
+                "reference": "71c023ae89d4ce3ee6230e158c2368ae4b4b957b",
                 "shasum": ""
             },
             "require": {
@@ -812,7 +812,7 @@
                 "elasticsearch",
                 "search"
             ],
-            "time": "2023-01-19T09:15:22+00:00"
+            "time": "2023-02-13T08:24:59+00:00"
         },
         {
             "name": "fakerphp/faker",
@@ -1932,16 +1932,16 @@
         },
         {
             "name": "league/commonmark",
-            "version": "2.3.8",
+            "version": "2.3.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/commonmark.git",
-                "reference": "c493585c130544c4e91d2e0e131e6d35cb0cbc47"
+                "reference": "c1e114f74e518daca2729ea8c4bf1167038fa4b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/c493585c130544c4e91d2e0e131e6d35cb0cbc47",
-                "reference": "c493585c130544c4e91d2e0e131e6d35cb0cbc47",
+                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/c1e114f74e518daca2729ea8c4bf1167038fa4b5",
+                "reference": "c1e114f74e518daca2729ea8c4bf1167038fa4b5",
                 "shasum": ""
             },
             "require": {
@@ -2034,7 +2034,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-12-10T16:02:17+00:00"
+            "time": "2023-02-15T14:07:24+00:00"
         },
         {
             "name": "league/config",

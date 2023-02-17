@@ -145,11 +145,7 @@ class ViewController extends Controller
     public function searching(Request $request)
     {
         $q = $request->q;
-        $coffees = DB::table('coffees')->where('name', 'like', "%$q%")->get();
-        $view = view('searchBox', compact('coffees'))->render();
-        return response()->json([
-            'view' => $view,
-            'records' => $coffees
-        ]);
+        $data = DB::table('coffees')->where('name', 'like', "%$q%")->get();
+        return response()->json($data);
     }
 }

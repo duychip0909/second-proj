@@ -71,11 +71,6 @@
             {{--});--}}
         });
         let debounceTimer;
-        if ($('.searchbox').val() == null) {
-            alert('hello');
-        } else {
-            $('#searchBox').show();
-        }
         $('.searchbox').keyup(function () {
             let q = $(this).val();
             if (q.length > 2) {
@@ -90,8 +85,20 @@
                         data: data,
                         url: '{{route('view.searching')}}',
                         success: function (res) {
-                            $('#searchBox').html(res.view);
+                            // $('#searchBox').html(res.view);
                             $('#searchBox').show();
+                            let html = '';
+                            $.each(res, function (index, coffee) {
+                                url = `/coffee/detail/${coffee.id}`;
+                                html += `<a class="result block transition p-2 mb-2" href="${url}">`;
+                                html += `<div class="flex items-center transition">`;
+                                html += `<img src="${coffee.image}" alt="" class="w-16 h-16 aspect-square object-cover">`;
+                                html += `<h5 class="ml-2">${coffee.name}</h5>`;
+                                html += `</div>`;
+                                html += `</a>`
+                            })
+                            $('#searchBox').hide();
+                            $('#searchBox').html(html).fadeIn();
                         }
                     })
                 }, 500)
