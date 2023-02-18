@@ -2,7 +2,7 @@
     <div class="container mx-auto">
         <div class="navbar flex justify-between items-center h-32">
             <div class="logo">
-                Brewing
+                BREWING*
             </div>
             <div class="navbar-nav">
                 <ul class="flex items-center">

@@ -1,5 +1,26 @@
+@font-face {
+    font-family: 'margaret';
+    src: url("../cheque_font/Trap-Black.otf") format('opentype');
+}
+
+@font-face {
+    font-family: 'silka';
+    src: url("../cheque_font/silkamono-regular-webfont.ttf") format('truetype');
+}
+
+
 :root {
     --drinks-img-height: 260px;
+}
+
+.logo {
+    font-family: 'margaret';
+    font-size: 36px;
+}
+
+
+body {
+    font-family: 'Montserrat', sans-serif;
 }
 
 .drinks-img-wrapper {
