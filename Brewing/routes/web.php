@@ -59,11 +59,16 @@ Route::middleware('auth')->prefix('admin')->group(function() {
 Route::group(['prefix' => 'coffee'], function() {
     Route::get('/', [ViewController::class, 'shop'])->name('coffee.shop');
     Route::get('addToCart/{id}', [ViewController::class, 'addToCart'])->name('coffee.addToCart');
-    Route::get('detail/{id}', [ViewController::class, 'detail'])->name('coffee.detail');
+    Route::get('detail/{id}', [ViewController::class, 'coffee_detail'])->name('coffee.detail');
     Route::get('showCart', [ViewController::class, 'showCart'])->name('coffee.showCart');
     Route::post('order', [ViewController::class, 'order'])->name('coffee.order');
     Route::get('search', [ViewController::class, 'search'])->name('coffee.search');
     Route::get('priceHtl', [ViewController::class, 'priceHtl'])->name('price-htl');
     Route::get('priceLth', [ViewController::class, 'priceLth'])->name('price-lth');
     Route::get('searching', [ViewController::class, 'searching'])->name('view.searching');
+});
+
+Route::group(['prefix' => 'about_us'], function () {
+    Route::get('/', [ViewController::class, 'about_us'])->name('about_us');
+    Route::get('detail/{id}', [ViewController::class, 'story_detail'])->name('story.detail');
 });

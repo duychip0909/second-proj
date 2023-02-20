@@ -6,9 +6,9 @@
             </div>
             <div class="navbar-nav">
                 <ul class="flex items-center">
-                    <li class="mx-4"><a href="#">Home</a></li>
+                    <li class="mx-4"><a href="{{route('coffee.shop')}}">Home</a></li>
                     <li class="mx-4"><a href="#">Our Cups</a></li>
-                    <li class="mx-4"><a href="#">About us</a></li>
+                    <li class="mx-4"><a href="{{route('about_us')}}">About us</a></li>
                     <li class="mx-4"><a href="#">Contact</a></li>
                     <li class="mx-4">
                         <a href="{{route('coffee.showCart')}}" class="relative inline-flex items-center p-1 text-sm font-medium text-center text-black cart">

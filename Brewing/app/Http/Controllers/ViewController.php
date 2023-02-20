@@ -9,13 +9,16 @@ use App\Models\Customer;
 use App\Models\OrderItem;
 use App\Models\Orders;
 use Illuminate\Http\Request;
-use GuzzleHttp\Client;
 use Illuminate\Support\Facades\DB;
-use Noty;
 
 
 class ViewController extends Controller
 {
+    function about_us() {
+        $cartData = $this->getCartData();
+        $title = 'Story';
+        return view('about_us', $cartData, compact('title'));
+    }
     function getCartData() {
         $carts = session()->get('cart', []);
         $totalQuantity = count($carts);
@@ -31,14 +34,21 @@ class ViewController extends Controller
     public function shop()
     {
         $cartData = $this->getCartData();
-        return view('welcome', $cartData);
+        $title = 'Coffees';
+        return view('welcome', $cartData, compact('title'));
     }
 
-    public function detail($id)
+    public function coffee_detail($id)
     {
         $cartData = $this->getCartData();
         $coffee = Coffee::find($id);
         return view('coffee-detail', $cartData, compact('coffee'));
+    }
+
+    public function story_detail($id)
+    {
+        $cartData = $this->getCartData();
+
     }
 
     public function priceHtl()

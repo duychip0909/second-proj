@@ -16,12 +16,7 @@
             toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
     })
-
-    $(document).ready(function(){
-        $('.content').slick({
-            slidePerRow: 3
-        });
-    });
+    
 
     $(document).on('click', '.btnAddToCart', function() {
         let btn = $(this);
