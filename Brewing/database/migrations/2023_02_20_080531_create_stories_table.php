@@ -15,9 +15,17 @@ return new class extends Migration
     {
         Schema::create('stories', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('story_category')->onDelete('cascade');
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->foreign('category_id')->references('id')->on('story_categories')->onDelete('cascade');
             $table->string('title');
+            $table->string('image');
+            $table->string('alias');
+            $table->text('short');
+            $table->text('detail');
+            $table->integer('status');
+            $table->string('author');
+            $table->string('news-source');
+            $table->string('link-news-source');
             $table->timestamps();
             $table->softDeletes();
         });

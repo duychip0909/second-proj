@@ -7,6 +7,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ViewController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StoryCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +54,15 @@ Route::middleware('auth')->prefix('admin')->group(function() {
 
     Route::group(['prefix' => 'customers'], function () {
        Route::get('manage', [CustomerController::class, 'manage'])->name('customer.manage');
+    });
+
+    Route::group(['prefix' => 'story-category'], function () {
+        Route::get('manage', [StoryCategoryController::class, 'manage'])->name('story-category.manage');
+        Route::get('create', [StoryCategoryController::class, 'create'])->name('story-category.create');
+        Route::post('store', [StoryCategoryController::class, 'store'])->name('story-category.store');
+        Route::get('edit/{id}', [StoryCategoryController::class, 'edit'])->name('story-category.edit');
+        Route::post('update/{id}', [StoryCategoryController::class, 'update'])->name('story-category.update');
+        Route::get('delete/{id}', [StoryCategoryController::class, 'delete'])->name('story-category.delete');
     });
 });
 

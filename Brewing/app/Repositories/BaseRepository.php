@@ -33,4 +33,19 @@ class BaseRepository implements BaseRepositoryInterface
         $record->update($data);
         return $record;
     }
+
+    public function getAll()
+    {
+        return $this->model->all();
+    }
+
+    public function delete($id)
+    {
+        return $this->model->find($id)->delete();
+    }
+
+    public function findById($id)
+    {
+        return $this->model->find($id);
+    }
 }

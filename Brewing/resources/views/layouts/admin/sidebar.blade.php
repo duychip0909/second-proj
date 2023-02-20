@@ -125,11 +125,15 @@
         <!-- Room -->
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                {{--                <i class="menu-icon tf-icons bx bx-cube-alt"></i>--}}
-                <i class='menu-icon tf-icons bx bx-home-heart' ></i>
-                <div data-i18n="Misc">...</div>
+                <i class='menu-icon tf-icons bx bx-note'></i>
+                <div data-i18n="Misc">Story</div>
             </a>
             <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="#" class="menu-link">
+                        <div data-i18n="Under Maintenance">Create</div>
+                    </a>
+                </li>
                 <li class="menu-item">
                     <a href="#" class="menu-link">
                         <div data-i18n="Under Maintenance">Manage</div>
@@ -147,6 +151,24 @@
                 <li class="menu-item">
                     <a href="{{route('customer.manage')}}" class="menu-link">
                         <div data-i18n="Error">Manage</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class='menu-icon tf-icons bx bx-edit-alt' ></i>
+                <div data-i18n="Misc">Story Category</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="{{route('story-category.manage')}}" class="menu-link">
+                        <div data-i18n="Error">Manage</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="{{route('story-category.create')}}" class="menu-link">
+                        <div data-i18n="Error">Create</div>
                     </a>
                 </li>
             </ul>

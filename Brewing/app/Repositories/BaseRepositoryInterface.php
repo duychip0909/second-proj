@@ -10,4 +10,9 @@ interface BaseRepositoryInterface
 
     public function update($data, $id);
 
+    public function getAll();
+
+    public function delete($id);
+
+    public function findById($id);
 }
