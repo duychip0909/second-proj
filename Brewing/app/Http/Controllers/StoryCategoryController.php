@@ -27,7 +27,7 @@ class StoryCategoryController extends Controller
     function manage()
     {
         $records = $this->getAll();
-        return view('story-category-manage', compact('records'));
+        return view('layouts.admin.Story.story-category-manage', compact('records'));
     }
 
     function delete($id)
@@ -43,7 +43,7 @@ class StoryCategoryController extends Controller
             'method' => 'post',
             'title' => 'Story Category Create Form'
         ];
-        return view('story-category-form', compact('form_options'));
+        return view('layouts.admin.Story.story-category-form', compact('form_options'));
     }
 
     function edit($id)
@@ -54,7 +54,7 @@ class StoryCategoryController extends Controller
             'method' => 'post',
             'title' => 'Story Category Edit Form'
         ];
-        return view('story-category-form', compact('form_options', 'record'));
+        return view('layouts.admin.Story.story-category-form', compact('form_options', 'record'));
     }
 
     function store(StoryCategory $request)

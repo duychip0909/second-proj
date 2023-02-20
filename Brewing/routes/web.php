@@ -8,6 +8,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ViewController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StoryCategoryController;
+use App\Http\Controllers\StoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,6 +64,15 @@ Route::middleware('auth')->prefix('admin')->group(function() {
         Route::get('edit/{id}', [StoryCategoryController::class, 'edit'])->name('story-category.edit');
         Route::post('update/{id}', [StoryCategoryController::class, 'update'])->name('story-category.update');
         Route::get('delete/{id}', [StoryCategoryController::class, 'delete'])->name('story-category.delete');
+    });
+
+    Route::group(['prefix' => 'story'], function () {
+        Route::get('manage', [StoryController::class, 'manage'])->name('story.manage');
+        Route::get('create', [StoryController::class, 'create'])->name('story.create');
+        Route::get('edit/{id}', [StoryController::class, 'edit'])->name('story.edit');
+        Route::post('store', [StoryController::class, 'store'])->name('story.store');
+        Route::post('update/{id}', [StoryController::class, 'update'])->name('story.update');
+        Route::get('delete/{id}', [StoryController::class, 'delete'])->name('story.delete');
     });
 });
 
