@@ -4,6 +4,7 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+@vite('resources/js/app.js')
 <script>
     const Toast = Swal.mixin({
         toast: true,
@@ -16,7 +17,7 @@
             toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
     })
-    
+
 
     $(document).on('click', '.btnAddToCart', function() {
         let btn = $(this);

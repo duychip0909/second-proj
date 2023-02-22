@@ -18,6 +18,7 @@
         <li class="my-2 ml-2 filter"><a href="{{route('price-htl')}}">high to low</a></li>
         <li class="my-2 ml-2 filter"><a href="{{route('price-lth')}}">low to high</a></li>
     </ul>
+    <div id="example"></div>
 @endsection
 
 @section('content')

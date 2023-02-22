@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BeanAddRequest;
+use App\Models\Beans;
 use App\Services\Interfaces\ICoffeeBeansService;
 use Illuminate\Http\Request;
 
@@ -18,6 +19,12 @@ class CoffeeBeansController extends Controller
     public function manage()
     {
         return view('coffee-beans-manage');
+    }
+
+    public function manage_beans()
+    {
+        $beans = Beans::all();
+        return response()->json($beans);
     }
 
     public function store(BeanAddRequest $request)
