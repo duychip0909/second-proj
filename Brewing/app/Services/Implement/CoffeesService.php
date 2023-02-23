@@ -21,8 +21,8 @@ class CoffeesService implements ICoffeesService
             $uploadFileName = $currentMillis . '.' . $data['image']->extension();
             $extensionArr = ['.jpg', '.png', '.jpeg', '.svg'];
             $realUrl = str_replace($extensionArr, '.webp', $uploadFileName);
-            $data['image']->move(public_path('images'), $realUrl);
-            $data['image'] = asset('images/'.$realUrl);
+            $data['image']->move(public_path('storage/images'), $realUrl);
+            $data['image'] = asset('storage/images/'.$realUrl);
         }
         return $this->coffeeRepository->store($data);
     }
@@ -34,8 +34,8 @@ class CoffeesService implements ICoffeesService
             $uploadFileName = $currentMillis . '.' . $data['image']->extension();
             $extensionArr = ['.jpg', '.png', '.jpeg', '.svg'];
             $realUrl = str_replace($extensionArr, '.webp', $uploadFileName);
-            $data['image']->move(public_path('images'), $realUrl);
-            $data['image'] = asset('images/'.$realUrl);
+            $data['image']->move(public_path('storage/images'), $realUrl);
+            $data['image'] = asset('storage/images/'.$realUrl);
         }
         return $this->coffeeRepository->update($data, $id);
     }

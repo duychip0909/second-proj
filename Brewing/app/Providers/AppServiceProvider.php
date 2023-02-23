@@ -6,7 +6,9 @@ use App\Services\Implement\AdminService;
 use App\Services\Implement\CoffeeBeansService;
 use App\Services\Implement\CoffeesService;
 use App\Services\Implement\StoryCategory;
+use App\Services\Implement\StoryService;
 use App\Services\Interfaces\ICoffeeBeansService;
+use App\Services\Interfaces\IStory;
 use App\Services\Interfaces\IStoryCategory;
 use Illuminate\Support\ServiceProvider;
 use App\Services\Interfaces\IAdminService;
@@ -25,6 +27,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(IAdminService::class, AdminService::class);
         $this->app->singleton(ICoffeeBeansService::class, CoffeeBeansService::class);
         $this->app->singleton(IStoryCategory::class, StoryCategory::class);
+        $this->app->singleton(IStory::class, StoryService::class);
     }
 
     /**

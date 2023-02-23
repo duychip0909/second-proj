@@ -8,6 +8,7 @@ use App\Models\Coffee;
 use App\Models\Customer;
 use App\Models\OrderItem;
 use App\Models\Orders;
+use App\Models\Story;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -17,7 +18,8 @@ class ViewController extends Controller
     function about_us() {
         $cartData = $this->getCartData();
         $title = 'Story';
-        return view('about_us', $cartData, compact('title'));
+        $stories = Story::all();
+        return view('about_us', $cartData, compact('title', 'stories'));
     }
     function getCartData() {
         $carts = session()->get('cart', []);
@@ -48,7 +50,9 @@ class ViewController extends Controller
     public function story_detail($id)
     {
         $cartData = $this->getCartData();
-
+        $story = Story::find($id);
+        $title = 'detail';
+        return view('story_detail', $cartData, compact('story', 'title'));
     }
 
     public function priceHtl()

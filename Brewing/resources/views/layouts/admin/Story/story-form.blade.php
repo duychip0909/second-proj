@@ -10,7 +10,7 @@
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label" for="basic-default-name">Thumbnail</label>
                     <div class="col-sm-10">
-                        <input type="file" name="filepond" class="my-pond" id="basic-default-name" placeholder="John Doe">
+                        <input type="file" name="image" id="basic-default-name" placeholder="John Doe">
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -67,19 +67,6 @@
 @endsection
 
 @section('customScript')
-    <!-- include FilePond library -->
-    <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
-
-    <!-- include FilePond plugins -->
-    <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.js"></script>
-
-    <!-- include FilePond jQuery adapter -->
-    <script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script>
-    <script>
-        $('.my-pond').filepond({
-            allowMultiple: true,
-        });
-    </script>
     <script>
         tinymce.init({
             selector: '#TinyMCE',

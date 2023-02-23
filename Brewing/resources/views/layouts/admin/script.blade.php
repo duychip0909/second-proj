@@ -16,6 +16,6 @@
 
 <!-- Page JS -->
 
-<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.tiny.cloud/1/tkz48x9t48c2ph1jgx92ps838k6eng2dn0ajbl1cg4lwlrky/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>

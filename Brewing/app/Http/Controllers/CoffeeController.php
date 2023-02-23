@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\CoffeeStatus;
+use App\Enums\DrinkOptions;
 use App\Http\Requests\StoreCoffeeRequest;
 use App\Models\Beans;
 use App\Models\Coffee;
@@ -48,8 +49,12 @@ class CoffeeController extends Controller
 
     public function manage_api()
     {
+        $options = DrinkOptions::getInstances();
         $coffees = Coffee::all();
-        return response()->json($coffees);
+        return response()->json([
+            'coffees' => $coffees,
+            'options' => $options
+        ]);
     }
 
     public function delete_api($id)
@@ -65,18 +70,19 @@ class CoffeeController extends Controller
     public function store_api(StoreCoffeeRequest $request)
     {
         $validated = $request->validated();
+
         $currentMillis = round(microtime(true) * 1000);
-        if(isset($validated['image'])) {
-            $uploadFileName = $currentMillis . '.' . $validated['image']->extension();
+        if(isset($validated->image)) {
+            $uploadFileName = $currentMillis . '.' . $validated->image->extension();
             $extensionArr = ['.jpg', '.png', '.jpeg', '.svg'];
             $realUrl = str_replace($extensionArr, '.webp', $uploadFileName);
-            $validated['image']->move(public_path('images'), $realUrl);
-            $validated['image'] = asset('images/'.$realUrl);
+            $validated->image->move(public_path('images'), $realUrl);
+            $validated->image = asset('images/'.$realUrl);
         }
         Coffee::create($validated);
         return response()->json([
             'message' => 'Thêm thành công cà phê mới',
-            'image1' => $validated['image']->extension(),
+            'data' => $validated
         ]);
     }
 
