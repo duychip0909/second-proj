@@ -22,46 +22,17 @@
 @endsection
 
 @section('content')
-    <div class="grid grid-cols-4 gap-8 isotope-grid">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8 isotope-grid">
         @foreach($coffees as $coffee)
-            <div class="w-full max-w-sm bg-white  overflow-hidden border border-gray-200 hover:shadow dark:bg-gray-200 dark:border-gray-200 drinks grid-item">
-                <a href="{{route('coffee.detail', ['id' => $coffee->id])}}" class="block drinks-img-wrapper w-full h-full overflow-hidden ">
-                    <img class="w-full h-full object-cover drinks-img" src="{{$coffee->image}}" alt="product image" />
-                </a>
-                <div class="p-3">
-                    <a href="#">
-                        <h5 class="text-base font-bold tracking-tight text-gray-900 dark:text-white text-center coffee-name">
-                            {{$coffee->name}}
-                            @foreach($options as $option)
-                                <span class="text-xs px-0.5 rounded {{$option->value == 1 ? 'text-red-600 bg-red-200' : 'text-blue-600 bg-blue-200'}}">{{$option->key}}</span>
-                            @endforeach
-                        </h5>
-                    </a>
-                    <div class="flex items-center justify-between text-base mt-4 relative">
-                        <span class="font-medium text-gray-900 dark:text-white">{{number_format($coffee->price)}}đ</span>
-                        <button data-url="{{route('coffee.addToCart', ['id' => $coffee->id])}}" class="px-2 py-0.5 transition ease-in-out duration-200 hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none btnAddToCart">Add
-                            to cart
-                        </button>
-                    </div>
-                </div>
-            </div>
+            @include('layouts.Components.card-product')
         @endforeach
     </div>
 @endsection
 
 @section('customScript')
-    <script>
+    <script type="module">
         $(document).ready(function () {
-            {{--$.ajax({--}}
-            {{--    url: {{route('coffee.order')}},--}}
-            {{--    type: 'POST',--}}
-            {{--    data: { CSRF: getCSRFTokenValue()},--}}
-            {{--    success: function (data) {--}}
-            {{--        if (data.event === 'Success') {--}}
-            {{--            console.log('helllo ');--}}
-            {{--        }--}}
-            {{--    }--}}
-            {{--});--}}
+
         });
         let debounceTimer;
         $('.searchbox').keyup(function () {
@@ -82,7 +53,7 @@
                             $('#searchBox').show();
                             let html = '';
                             $.each(res, function (index, coffee) {
-                                url = `/coffee/detail/${coffee.id}`;
+                                let url = `/coffee/detail/${coffee.id}`;
                                 html += `<a class="result block transition p-2 mb-2" href="${url}">`;
                                 html += `<div class="flex items-center transition">`;
                                 html += `<img src="${coffee.image}" alt="" class="w-16 h-16 aspect-square object-cover">`;

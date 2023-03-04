@@ -4,8 +4,13 @@
             <div class="logo">
                 BREWING*
             </div>
-            <div class="navbar-nav">
-                <ul class="flex items-center">
+            <a href="javascript:">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
+                </svg>
+            </a>
+            <div class="navbar-nav absolute lg:block">
+                <ul class="flex-col lg:flex-row flex items-center">
                     <li class="mx-4"><a href="{{route('coffee.shop')}}">Home</a></li>
                     <li class="mx-4"><a href="#">Our Cups</a></li>
                     <li class="mx-4"><a href="{{route('about_us')}}">About us</a></li>
